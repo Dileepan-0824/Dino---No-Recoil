@@ -1,0 +1,11 @@
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Archives
+*.zip
