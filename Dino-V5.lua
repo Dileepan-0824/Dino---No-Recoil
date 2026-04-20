@@ -1908,9 +1908,8 @@ function OnEvent(event, arg)
 			-- Ticks 41-80 (bullets 7-13): Settling phase
 			global_pull_modifier = 0.30
 		else
-			-- [FIX 9] ADAPTIVE LATE-SPRAY FLOOR: High-recoil patterns keep more pull
-			local y_strength = math.min(math.abs(y) / 20, 1.0)
-			global_pull_modifier = 0.22 + (y_strength * 0.08)
+			-- LATE SPRAY FLOOR: flat 0.25 for all weapons
+			global_pull_modifier = 0.25
 		end
 
 		-- [FIX 5] FIRST-BULLET COMPENSATION: Dino first-bullet recoil kicks in slightly later

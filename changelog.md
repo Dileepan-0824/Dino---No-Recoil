@@ -36,7 +36,6 @@
 | Fix | Name | Description |
 |-----|------|-------------|
 | **7** | Burst Memory | If you release and re-click within 400ms, resumes the pattern from where you left off instead of restarting from bullet 1. Full reset only after 400ms+ gap |
-| **9** | Adaptive Late-Spray Floor | Replaces the flat `0.25` late-spray modifier with a dynamic value: high-recoil guns (AKM/Beryl, y > 15) get up to `0.30`, low-recoil SMGs stay near `0.22` |
 
 ---
 
@@ -69,7 +68,6 @@
 | 4 — End-of-Mag Extension | | ✅ | ✅ | ✅ | ✅ |
 | 5 — First-Bullet Comp | | ✅ | ✅ | ✅ | ✅ |
 | 7 — Burst Memory | | | ✅ | ✅ | ✅ |
-| 9 — Adaptive Late-Spray Floor | | | ✅ | ✅ | ✅ |
 | 10 — Spray Transfer Detection | | | | ✅ | ✅ |
 | 16 — Anti-Drift Correction | | | | | ✅ |
 | 17 — Elapsed-Time Compensation | | | | | ✅ |
