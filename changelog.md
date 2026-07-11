@@ -12,7 +12,7 @@
 
 ### Engine Tuning
 | Change | From (Original) | To (V1) |
-|--------|-----------------|---------|
+|--------|-----------------|---------| 
 | Horizontal Pull Modifier | `0.55` | `0.75` |
 | Global Pull Modifier (initial) | `0.575` | `0.50` |
 | End-of-Mag Extension ticks | `150` (~2.5s) | `360` (~6s) |
@@ -58,16 +58,81 @@
 
 ---
 
+## V6 — DMR Mode, Weapon Tuning Panel & Keybind Overhaul
+> Base: `V5` + 4 major additions
+
+### DMR No-Recoil Mode (New)
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `dmr_pull` | `25` | Total pixels pulled down per single tap |
+| `dmr_steps` | `4` | Number of smoothing subdivisions |
+| `dmr_sleep` | `10` | Delay between smoothing steps (ms) |
+| `dmr_tap_mode` | `1` | Tap behavior mode |
+| `dmr_tap_delay` | `2` | Delay between taps |
+| `dmr_click_duration` | `5` | Click hold duration |
+
+### Weapon Tuning Panel (New)
+Added a `WeaponTuner` table at the top of the script allowing per-weapon recoil multiplier customization:
+
+| Weapon | Stand | Crouch | Notes |
+|--------|-------|--------|-------|
+| AKM | 2.57 | 2.05 | Heavy 7.62 |
+| M416 | 1.50 | 1.20 | **Baseline anchor** |
+| Beryl | 2.71 | 2.17 | Heaviest recoil AR |
+| SCAR-L | 1.49 | 1.20 | Slightly less than M416 |
+| QBZ | 1.58 | 1.28 | Close to SCAR |
+| ACE32 | 2.27 | 1.81 | Heavy 7.62, controllable |
+| K2 | 1.56 | 1.25 | Slightly more than M416 |
+| FAMAS | 1.76 | 1.42 | Higher RPM |
+| GROZA | 2.34 | 1.88 | Crate 7.62, very heavy |
+| AUG | 1.48 | 1.22 | Crate AR, lowest recoil |
+| G36C | 1.46 | 1.17 | Vikendi, very low |
+| DP-28 | 1.80 | 1.45 | Slow RPM, moderate |
+| M249 | 2.20 | 1.76 | Heavy sustained |
+| MG3 | 2.12 | 1.70 | Fast RPM LMG |
+| Bizon | 1.20 | 0.97 | Very low recoil |
+| Tommy | 1.38 | 1.11 | Slow, moderate |
+| UMP45 | 1.16 | 0.94 | Lowest recoil SMG |
+| UZI | 1.20 | 0.97 | Low, very fast |
+| Vector | 1.36 | 1.10 | Fast RPM |
+| MP5K | 1.26 | 1.02 | Medium SMG |
+| P90 | 1.33 | 1.08 | Medium, large mag |
+| MP9 | 1.25 | 1.02 | Low recoil |
+| JS9 | 1.28 | 1.04 | Low-medium |
+
+### Keybind Changes
+| Weapon | V5 Bind | V6 Bind | Change |
+|--------|---------|---------|--------|
+| Vector | `506` | `106` | Moved for ergonomics |
+| P90 | `106` | `506` | Swapped with Vector |
+| MP9 | `nil` | `606` | **Now bound** |
+| JS9 | `606` | `306` | Moved |
+| Bizon | `306` | `nil` | Freed (assign as needed) |
+| DP-28 | `605` | `nil` | Freed (slot given to DMR) |
+| DMR | — | `605` | **New slot** |
+
+### PUBG Mobile Script (New)
+Added standalone `Dino-PUBGM.lua` with:
+- AR + DMR dual-mode switching (Mouse 4 / Mouse 5)
+- Lean-spam automation (ScrollLock toggle)
+- Simplified single-button controls for emulator play
+
+---
+
 ## All Fixes Summary
 
-| Fix | V1 | V2 | V3 | V4 | V5 |
-|-----|----|----|----|----|-----|
-| Modifier Keybind System | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Engine Tuning (0.75 horiz, 0.50 pull) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 1 — Smooth Decay | | ✅ | ✅ | ✅ | ✅ |
-| 4 — End-of-Mag Extension | | ✅ | ✅ | ✅ | ✅ |
-| 5 — First-Bullet Comp | | ✅ | ✅ | ✅ | ✅ |
-| 7 — Burst Memory | | | ✅ | ✅ | ✅ |
-| 10 — Spray Transfer Detection | | | | ✅ | ✅ |
-| 16 — Anti-Drift Correction | | | | | ✅ |
-| 17 — Elapsed-Time Compensation | | | | | ✅ |
+| Fix | V1 | V2 | V3 | V4 | V5 | V6 |
+|-----|----|----|----|----|-----|-----|
+| Modifier Keybind System | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Engine Tuning (0.75 horiz, 0.50 pull) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 1 — Smooth Decay | | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 4 — End-of-Mag Extension | | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 5 — First-Bullet Comp | | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 7 — Burst Memory | | | ✅ | ✅ | ✅ | ✅ |
+| 10 — Spray Transfer Detection | | | | ✅ | ✅ | ✅ |
+| 16 — Anti-Drift Correction | | | | | ✅ | ✅ |
+| 17 — Elapsed-Time Compensation | | | | | ✅ | ✅ |
+| DMR No-Recoil Mode | | | | | | ✅ |
+| Weapon Tuning Panel | | | | | | ✅ |
+| Keybind Reorganization | | | | | | ✅ |
+| PUBG Mobile Script | | | | | | ✅ |
