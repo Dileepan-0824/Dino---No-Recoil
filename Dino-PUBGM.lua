@@ -2,10 +2,10 @@
  
 --[[MASTER SCRIPT ENABLE/DISABLE SETTINGS]]--
 --------------------------------------------------------------------------------------------------------------
-local ar_mode_button = 4 -- MOUSE BUTTON FOR AR MODE (NumLock OFF, CapsLock ON)
-local dmr_mode_button = 5 -- MOUSE BUTTON FOR DMR MODE (NumLock ON, CapsLock OFF)
+local ar_mode_button = 4 -- MOUSE BUTTON FOR AR MODE (ScrollLock OFF, CapsLock ON)
+local dmr_mode_button = 5 -- MOUSE BUTTON FOR DMR MODE (ScrollLock ON, CapsLock OFF)
 local st_k="capslock" --TURN ON/OFF MASTER SCRIPT KEY.
-local dmr_k="numlock" --TURN ON/OFF DMR MODE (NumLock ON = DMR, NumLock OFF = AR).
+local dmr_k="scrolllock" --TURN ON/OFF DMR MODE (ScrollLock ON = DMR, ScrollLock OFF = AR).
  
 --[[AR NO RECOIL SETTINGS (AUTOMATIC)]]--
 --------------------------------------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ local dmr_sleep=10 -- DELAY BETWEEN SMOOTHING STEPS IN MILLISECONDS
 
 --[[LEAN-SPAM SETTINGS]]--
 --------------------------------------------------------------------------------------------------------------
-local lt_k="scrolllock" --KEY TO TURN ON/OFF LEANSPAM WHILE LEFT CLICKING
+local lt_k="numlock" --KEY TO TURN ON/OFF LEANSPAM WHILE LEFT CLICKING
 local ll_k="Q" --LEFT PEEK KEY SETTING DEFAULT: "Q"
 local rl_k="E" --RIGHT PEEK KEY SETTING DEFAULT "E"
 local m_l=3 --FINE TUNE SETTING FOR LEAN TIME
@@ -115,11 +115,11 @@ function OnEvent(event, arg)
             else
                 -- Script is off: enter the respective mode
                 if (arg == ar_mode_button) then
-                    -- Enter AR mode (CapsLock ON, NumLock OFF)
+                    -- Enter AR mode (CapsLock ON, ScrollLock OFF)
                     PressAndReleaseKey(st_k)
                     is_ar_on = true
                 elseif (arg == dmr_mode_button) then
-                    -- Enter DMR mode (CapsLock OFF, NumLock ON)
+                    -- Enter DMR mode (CapsLock OFF, ScrollLock ON)
                     PressAndReleaseKey(dmr_k)
                     is_dmr_on = true
                 end

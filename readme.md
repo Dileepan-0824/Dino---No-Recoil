@@ -7,7 +7,7 @@
 **A precision-tuned Lua macro for Logitech G Hub that eliminates weapon recoil in PUBG.**  
 Optimized for the **Logitech G102** at **800 DPI** — compatible with all G-Series mice.
 
-[![Latest Release](https://img.shields.io/badge/Latest-V6-brightgreen?style=for-the-badge)](#version-history)
+[![Latest Release](https://img.shields.io/badge/Latest-V7-brightgreen?style=for-the-badge)](#version-history)
 [![PUBG PC](https://img.shields.io/badge/PUBG-PC-blue?style=for-the-badge)](#)
 [![PUBG Mobile](https://img.shields.io/badge/PUBG-Mobile-orange?style=for-the-badge)](#pubg-mobile-script)
 
@@ -17,6 +17,7 @@ Optimized for the **Logitech G102** at **800 DPI** — compatible with all G-Ser
 
 ## Table of Contents
 
+- [What's New in V7](#whats-new-in-v7)
 - [What's New in V6](#whats-new-in-v6)
 - [Features](#features)
 - [Before & After](#before--after)
@@ -30,6 +31,18 @@ Optimized for the **Logitech G102** at **800 DPI** — compatible with all G-Ser
 - [Version History](#version-history)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
+
+---
+
+## What's New in V7
+
+> **V7 introduces the RPD LMG, 65% keyboard layout optimization, and arsenal cleanup.**
+
+| Feature | Description |
+|---------|-------------|
+| **RPD 7.62mm LMG Support** | Complete recoil profile for PUBG's RPD (750 RPM). Includes 50-round standard and 110-round extended magazine profiles, stock stabilization, and stance scaling. |
+| **65% Keyboard Layout Swap** | Swapped ScrollLock and NumLock across all scripts so compact 65% / 75% / TKL keyboard and laptop users can easily toggle attachment mode using **NumLock**. |
+| **Vaulted Weapons Cleanup** | Removed obsolete DP-28 and PP-19 Bizon profiles following their removal from the active game pool, streamlining file size and execution. |
 
 ---
 
@@ -56,7 +69,7 @@ Optimized for the **Logitech G102** at **800 DPI** — compatible with all G-Ser
 - **Anti-Drift Correction** — Automatically corrects horizontal crosshair drift during sustained fire
 - **Elapsed-Time Compensation** — Scales pull proportionally when ticks run late due to CPU load
 - **First-Bullet Compensation** — Reduces initial pull to match PUBG's delayed first-shot recoil
-- **Attachment-Aware** — Toggle ScrollLock for with/without attachment profiles
+- **Attachment-Aware** — Toggle NumLock for with/without attachment profiles (optimized for 65% keyboards)
 - **Stance-Aware** — Hold LCTRL (crouch) or LSHIFT (scoped) for stance-specific compensation
 - **Fully Customizable** — Adjustable sensitivity, click mode, weapon tuning, and key bindings
 - **Undetectable** — Uses native Logitech G Hub Lua scripting, no third-party injection
@@ -107,7 +120,7 @@ Download and install [Logitech G Hub](https://www.logitechg.com/en-us/innovation
 
 ### Step 2 — Load the Script
 
-1. Download the latest script: **`Dino-V6.lua`**
+1. Download the latest script: **`Dino-V7.lua`**
 2. Open Logitech G Hub → select your **PUBG profile**
 3. Navigate to **Scripting** (bottom-left panel)
 4. Click **Create New Lua Script** → paste the script → **Save**
@@ -118,8 +131,8 @@ Download and install [Logitech G Hub](https://www.logitechg.com/en-us/innovation
 |---------|----------|
 | CapsLock ON | Macro **enabled** |
 | CapsLock OFF | Macro **disabled** |
-| ScrollLock ON | With attachments mode |
-| ScrollLock OFF | Without attachments mode |
+| NumLock ON | With attachments mode (swapped for 65% keyboards) |
+| NumLock OFF | Without attachments mode |
 | Hold LCTRL (keyboard) | Crouch compensation |
 | Hold LSHIFT (keyboard) | Scoped / hold-breath compensation |
 
@@ -193,9 +206,9 @@ local dmr_click_duration = 5 -- Click hold duration
 | Category | Weapons |
 |----------|---------|
 | **Assault Rifles** (11) | AKM · Beryl · G36C · M416 · SCAR-L · QBZ · AUG · GROZA · ACE32 · K2 · FAMAS |
-| **SMGs** (9) | Bizon · Tommy Gun · UMP45 · UZI · Vector · MP5K · P90 · MP9 · JS9 |
-| **LMGs** (3) | DP-28 · M249 · MG3 |
-| **DMR** (new) | Generic DMR mode — works with any semi-auto weapon |
+| **SMGs** (8) | Tommy Gun · UMP45 · UZI · Vector · MP5K · P90 · MP9 · JS9 |
+| **LMGs** (3) | M249 · MG3 · RPD (new) |
+| **DMR** | Generic DMR mode — works with any semi-auto weapon |
 
 ---
 
@@ -212,7 +225,7 @@ All weapons are mapped using **3 mouse buttons** (4, 5, 6) combined with **7 mod
 | LALT | +200 | LALT + Mouse 4 → `204` |
 | RCTRL | +300 | RCTRL + Mouse 4 → `304` |
 | RALT | +400 | RALT + Mouse 4 → `404` |
-| NumLock | +500 | NumLock + Mouse 4 → `504` |
+| ScrollLock | +500 | ScrollLock + Mouse 4 → `504` |
 | RSHIFT | +600 | RSHIFT + Mouse 4 → `604` |
 
 ### Weapon Bindings (V6)
@@ -231,7 +244,7 @@ All weapons are mapped using **3 mouse buttons** (4, 5, 6) combined with **7 mod
 | FAMAS | `604` | DMR | `605` |
 | MP9 | `606` | | |
 
-> **Note:** Bizon, Tommy Gun, and DP-28 are set to `nil` by default in V6. Assign them to any free slot if needed.
+> **Note:** Tommy Gun and RPD are set to `nil` by default in V7 (DP-28 & Bizon vaulted). Assign them to any free modifier+button slot if needed.
 
 ---
 
@@ -250,9 +263,9 @@ A separate, standalone script for **PUBG Mobile** (emulator) is included: **`Din
 | Control | Function |
 |---------|----------|
 | Mouse 4 | Toggle **AR mode** (CapsLock ON) |
-| Mouse 5 | Toggle **DMR mode** (NumLock ON) |
-| ScrollLock ON | Lean-spam enabled |
-| ScrollLock OFF | Lean-spam disabled |
+| Mouse 5 | Toggle **DMR mode** (ScrollLock ON) |
+| NumLock ON | Lean-spam enabled |
+| NumLock OFF | Lean-spam disabled |
 
 ### Configuration
 
@@ -275,7 +288,8 @@ local dmr_steps = 4 -- DMR smoothing steps
 | V3 | `Dino-V3.lua` | Burst memory (400ms re-fire resume), adaptive late-spray floor |
 | V4 | `Dino-V4.lua` | Spray transfer detection (soft reset on target switch mid-spray) |
 | V5 | `Dino-V5.lua` | Anti-drift correction, elapsed-time compensation |
-| **V6** | **`Dino-V6.lua`** | **DMR mode, Weapon Tuning Panel, keybind reorganization, MP9 support** |
+| V6 | `Dino-V6.lua` | DMR mode, Weapon Tuning Panel, keybind reorganization, MP9 support |
+| **V7** | **`Dino-V7.lua`** | **Added RPD (7.62mm LMG), swapped ScrollLock/NumLock for 65% keyboards, removed vaulted DP-28 & Bizon** |
 | Mobile | `Dino-PUBGM.lua` | Standalone PUBG Mobile script with AR/DMR dual-mode + lean-spam |
 
 > See [changelog.md](changelog.md) for full technical documentation of each improvement.
@@ -288,7 +302,7 @@ local dmr_steps = 4 -- DMR smoothing steps
 |-------|----------|
 | Script not activating | Ensure G Hub is running and Lua scripting is enabled. Assign script to PUBG profile. Run G Hub as administrator. |
 | Recoil feels too strong/weak | Adjust `SensSetting` value or tweak individual weapon values in the `WeaponTuner` table. Verify your mouse is at 800 DPI. |
-| Modifier keys not registering | Hold the modifier key **before** pressing the mouse button. Check NumLock state for NumLock binds. |
+| Modifier keys not registering | Hold the modifier key **before** pressing the mouse button. Check ScrollLock state for ScrollLock binds. |
 | G Hub not detecting script | Restart G Hub. Delete and re-import the script. Reinstall G Hub if issues persist. |
 | DMR pull too strong/weak | Adjust `dmr_pull` (total pixels) and `dmr_steps` (smoothing) in the DMR settings section. |
 | Weapon not bound | Check the Weapon Bindings table. Some weapons are `nil` by default in V6 — assign them a free modifier+button slot. |
@@ -303,5 +317,5 @@ Open-source and free to use. Provided as-is without warranties. Use responsibly.
 
 <div align="center">
   <strong>Enjoy precision aim in PUBG.</strong><br>
-  <sub>Dino V6 — July 2026</sub>
+  <sub>Dino V7 — September 2026</sub>
 </div>

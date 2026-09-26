@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------- MACRO ENABLED CAPSLOCK ON | MACRO DISABLED CAPSLOCK OFF ---------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------- WITHOUT ATTACHMENTS SCROLLLOCK OFF | WITH ATTACHMENTS SCROLLLOCK ON ---------------------------------------
+--------------------------------------- WITHOUT ATTACHMENTS NUMLOCK OFF | WITH ATTACHMENTS NUMLOCK ON ---------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------- IN CROUCH MODE HOLD CTRL (FROM KEYBOARD) WHILE SHOOTING !  ------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@
 -- LALT   = +200 (e.g., LALT + Mouse 4 = 204)
 -- RCTRL  = +300 (e.g., RCTRL + Mouse 4 = 304)
 -- RALT   = +400 (e.g., RALT + Mouse 4 = 404)
--- NUMLOCK= +500 (e.g., NumLock ON + Mouse 4 = 504)
+-- SCROLLLOCK= +500 (e.g., ScrollLock ON + Mouse 4 = 504)
 -- RSHIFT = +600 (e.g., RSHIFT + Mouse 4 = 604)
 -- -------------------------------------------------------------
 
@@ -138,9 +138,9 @@ local dmr_click_duration=5
 -------------------------------------------------------------------------
 local WeaponTuner = {
     -- ASSAULT RIFLES
-    AKM    = { stand = 2.57, crouch = 2.05 },  -- Heavy 7.62, kicks hardest among common ARs
+    AKM    = { stand = 2.17, crouch = 1.65 },  -- Heavy 7.62, kicks hardest among common ARs
     M416   = { stand = 1.50, crouch = 1.20 },  -- BASELINE anchor
-    BERRYL = { stand = 2.71, crouch = 2.17 },  -- Heaviest recoil AR
+    BERRYL = { stand = 2.21, crouch = 1.77 },  -- Heaviest recoil AR
     SCAR_L = { stand = 1.49, crouch = 1.20 },  -- Slightly less than M416
     QBZ    = { stand = 1.58, crouch = 1.28 },  -- Very close to SCAR
     ACE32  = { stand = 2.27, crouch = 1.81 },  -- Heavy 7.62 but controllable
@@ -186,7 +186,7 @@ function OnEvent(event, arg)
 			arg = arg + 200
 		elseif IsModifierPressed("lctrl") then
 			arg = arg + 100
-		elseif IsKeyLockOn("numlock") then
+		elseif IsKeyLockOn("scrolllock") then
 			arg = arg + 500
 		end
 	end
@@ -545,49 +545,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == VECTOR or weapon == VECTOR_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				VECTORRatt_(Dino23())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					VECTORRatt(Dino23())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						VECTORR_(Dino21())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							VECTORR(Dino21())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								VECTORRatt_(Dino22())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									VECTORRatt(Dino22())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										VECTORR_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -603,49 +603,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == P90 or weapon == P90_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				P900_(Dino25())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					P900(Dino25())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						P900_(Dino25())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							P900(Dino25())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								P900_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									P900(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										P900_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -661,49 +661,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == UZI or weapon == UZI_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				UZIIatt_(Dino20())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					UZIIatt(Dino20())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						UZII_(Dino20())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							UZII(Dino20())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								UZIIatt_(Dino19())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									UZIIatt(Dino19())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										UZII_(Dino19())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -719,49 +719,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == MP9 or weapon == MP9_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				MP99att_(Dino26())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					MP99att(Dino8())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						MP99_(Dino8())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							MP99(Dino18())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								MP99att_(Dino27())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									MP99att(Dino22())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										MP99_(Dino22())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -777,49 +777,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == JS9 or weapon == JS9_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				JS99att_(Dino30())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					JS99att(Dino29())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						JS99_(Dino20())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							JS99(Dino32())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								JS99att_(Dino24())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									JS99att(Dino28())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										JS99_(Dino19())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -835,49 +835,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == G36C or weapon == G36C_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				G36CCatt_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					G36CCatt(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						G36CC_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							G36CC(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								G36CCatt_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									G36CCatt(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										G36CC_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -893,49 +893,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == BERRYL or weapon == BERRYL_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				BERRYLLatt_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					BERRYLLatt(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						BERRYLL_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							BERRYLL(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								BERRYLLatt_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									BERRYLLatt(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										BERRYLL_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -951,49 +951,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == K2 or weapon == K2_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				K22att_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					K22att(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						K22_(Dino14())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							K22(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								K22att_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									K22att(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										K22_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1009,49 +1009,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == BIZON or weapon == BIZON_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				BIZONNatt_(Dino39())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					BIZONNatt(Dino10())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						BIZONN_(Dino39())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							BIZONN(Dino10())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								BIZONNatt_(Dino8())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									BIZONNatt(Dino8())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										BIZONN_(Dino8())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1067,49 +1067,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == UMP45 or weapon == UMP45_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				UMP455att_(Dino10())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					UMP455att(Dino10())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						UMP455_(Dino18())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							UMP455(Dino17())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								UMP455att_(Dino44())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									UMP455att(Dino44())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										UMP455_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1125,49 +1125,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == DP28 or weapon == DP28_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				DP288_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					DP288(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						DP288_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							DP288(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								DP288_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									DP288(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										DP288_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1183,49 +1183,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == M249 or weapon == M249_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				M2499att_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					M2499att(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						M2499_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							M2499(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								M2499att_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									M2499att(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										M2499_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1241,49 +1241,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == AKM or weapon == AKM_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				AKMMatt_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					AKMMatt(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						AKMM_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							AKMM(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								AKMMatt_(Dino3())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									AKMMatt(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										AKMM_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1299,49 +1299,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == ACE32 or weapon == ACE32_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				ACE322att_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					ACE322att(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						ACE322_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							ACE322(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								ACE322att_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									ACE322att(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										ACE322_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1357,49 +1357,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == M416 or weapon == M416_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				M4166att_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					M4166att(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						M4166_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							M4166(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								M4166att_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									M4166att(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										M4166_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1415,49 +1415,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == FAMAS or weapon == FAMAS_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				FAMASSatt_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					FAMASSatt(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						FAMASS_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							FAMASS(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								FAMASSatt_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									FAMASSatt(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										FAMASS_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1473,49 +1473,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == SCAR_L or weapon == SCAR_L_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				SCAR_LLatt_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					SCAR_LLatt(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						SCAR_LL_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							SCAR_LL(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								SCAR_LLatt_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									SCAR_LLatt(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										SCAR_LL_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1531,49 +1531,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == QBZ or weapon == QBKeyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				QBZZatt_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					QBZZatt(Dino5())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						QBZZ_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							QBZZ(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								QBZZatt_(Dino6())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									QBZZatt(Dino4())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										QBZZ_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1589,49 +1589,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == MG3 or weapon == MG3_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				MG33att_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					MG33att(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						MG33_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							MG33(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								MG33att_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									MG33att(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										MG33_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1647,49 +1647,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == AUG or weapon == AUG_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				AUGGatt_(Dino34())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					AUGGatt(Dino12())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						AUGG_(Dino10())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							AUGG(Dino9())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								AUGGatt_(Dino13())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									AUGGatt(Dino11())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										AUGG_(Dino33())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1705,49 +1705,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == TOMMY or weapon == TOMMY_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				TOMMYYatt_(Dino42())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					TOMMYYatt(Dino43())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						TOMMYY_(Dino42())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							TOMMYY(Dino43())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								TOMMYYatt_(Dino41())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									TOMMYYatt(Dino41())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										TOMMYY_(Dino41())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1763,49 +1763,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == MP5K or weapon == MP5K_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				MP5KKatt_(Dino39())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					MP5KKatt(Dino40())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						MP5KK_(Dino13())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							MP5KK(Dino36())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								MP5KKatt_(Dino38())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									MP5KKatt(Dino37())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										MP5KK_(Dino37())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then
@@ -1821,49 +1821,49 @@ function OnEvent(event, arg)
 		end
 	elseif weapon == GROZA or weapon == GROZA_Keyboard then
 		if recoil == true and IsKeyLockOn("capslock") then
-			if (IsKeyLockOn("scrolllock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+			if (IsKeyLockOn("numlock")) and (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 				GROZAAatt_(Dino2())
 			else
-				if (IsKeyLockOn("scrolllock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
+				if (IsKeyLockOn("numlock")) and not (IsModifierPressed("lctrl")) and (IsModifierPressed("lshift")) then
 					GROZAAatt(Dino2())
 				else
 					if
-						not (IsKeyLockOn("scrolllock"))
+						not (IsKeyLockOn("numlock"))
 						and (IsModifierPressed("lctrl"))
 						and (IsModifierPressed("lshift"))
 					then
 						GROZAA_(Dino2())
 					else
 						if
-							not (IsKeyLockOn("scrolllock"))
+							not (IsKeyLockOn("numlock"))
 							and not (IsModifierPressed("lctrl"))
 							and (IsModifierPressed("lshift"))
 						then
 							GROZAA(Dino2())
 						else
 							if
-								(IsKeyLockOn("scrolllock"))
+								(IsKeyLockOn("numlock"))
 								and (IsModifierPressed("lctrl"))
 								and not (IsModifierPressed("lshift"))
 							then
 								GROZAAatt_(Dino1())
 							else
 								if
-									(IsKeyLockOn("scrolllock"))
+									(IsKeyLockOn("numlock"))
 									and not (IsModifierPressed("lctrl"))
 									and not (IsModifierPressed("lshift"))
 								then
 									GROZAAatt(Dino1())
 								else
 									if
-										not (IsKeyLockOn("scrolllock"))
+										not (IsKeyLockOn("numlock"))
 										and (IsModifierPressed("lctrl"))
 										and not (IsModifierPressed("lshift"))
 									then
 										GROZAA_(Dino1())
 									else
 										if
-											not (IsKeyLockOn("scrolllock"))
+											not (IsKeyLockOn("numlock"))
 											and not (IsModifierPressed("lctrl"))
 											and not (IsModifierPressed("lshift"))
 										then

@@ -58,6 +58,30 @@
 
 ---
 
+## V7 — RPD 7.62mm LMG, 65% Keyboard Layout Optimization & Arsenal Refresh
+> Base: `V6` + RPD LMG integration + 65% layout keybind swap + vaulted weapons cleanup
+
+### RPD 7.62mm LMG Support (New Weapon)
+- **750 RPM Recoil Engine Profile**: Implemented full auto compensation curves for PUBG's new RPD (Update 42.3/43.1).
+- **Stance & Magazine Support**:
+  - `RPDD` / `RPDD_`: 50-round standard magazine profiles for standing and crouching.
+  - `RPDatt` / `RPDatt_`: Extended 110-round magazine profiles with Tactical/Heavy Stock recoil damping.
+- **WeaponTuner Multipliers**: Added `RPD = { stand = 2.18, crouch = 1.74 }` tuned specifically for 750 RPM 7.62mm kick.
+- **Engine Pipeline Integration**: Hooked into `is_762` profile (`y = y * 0.95`) and inherits Burst Memory, Spray Transfer Detection, Anti-Drift, and Elapsed-Time Compensation.
+
+### 65% Keyboard Layout Optimization (ScrollLock ↔ NumLock Swap)
+- **Accessibility Fix**: Users on compact 65%, 75%, 60%, TKL keyboards and laptops frequently lack a dedicated physical `ScrollLock` key.
+- **Functionality Swap**:
+  - **NumLock**: Now toggles **Attachment Mode** across all version scripts (NumLock ON = attachments, OFF = without attachments).
+  - **ScrollLock**: Now serves as the **+500 Modifier Key** for mouse combos.
+  - **Dino-PUBGM.lua**: Swapped so Mouse 5 toggles DMR mode with `ScrollLock`, while `NumLock` toggles Lean-Spam.
+
+### Vaulted Weapons Cleanup
+- Removed **DP-28** and **PP-19 Bizon** from `Dino-V7.lua` following their removal from the active game pool.
+- Removed all corresponding variables, `WeaponTuner` entries, `OnEvent` triggers, and 8 recoil routines (~11,500 lines of dead code cleaned).
+
+---
+
 ## V6 — DMR Mode, Weapon Tuning Panel & Keybind Overhaul
 > Base: `V5` + 4 major additions
 
@@ -121,18 +145,21 @@ Added standalone `Dino-PUBGM.lua` with:
 
 ## All Fixes Summary
 
-| Fix | V1 | V2 | V3 | V4 | V5 | V6 |
-|-----|----|----|----|----|-----|-----|
-| Modifier Keybind System | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Engine Tuning (0.75 horiz, 0.50 pull) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 1 — Smooth Decay | | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 4 — End-of-Mag Extension | | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 5 — First-Bullet Comp | | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 7 — Burst Memory | | | ✅ | ✅ | ✅ | ✅ |
-| 10 — Spray Transfer Detection | | | | ✅ | ✅ | ✅ |
-| 16 — Anti-Drift Correction | | | | | ✅ | ✅ |
-| 17 — Elapsed-Time Compensation | | | | | ✅ | ✅ |
-| DMR No-Recoil Mode | | | | | | ✅ |
-| Weapon Tuning Panel | | | | | | ✅ |
-| Keybind Reorganization | | | | | | ✅ |
-| PUBG Mobile Script | | | | | | ✅ |
+| Fix | V1 | V2 | V3 | V4 | V5 | V6 | V7 |
+|-----|----|----|----|----|----|-----|-----|
+| Modifier Keybind System | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Engine Tuning (0.75 horiz, 0.50 pull) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 1 — Smooth Decay | | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 4 — End-of-Mag Extension | | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 5 — First-Bullet Comp | | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 7 — Burst Memory | | | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 10 — Spray Transfer Detection | | | | ✅ | ✅ | ✅ | ✅ |
+| 16 — Anti-Drift Correction | | | | | ✅ | ✅ | ✅ |
+| 17 — Elapsed-Time Compensation | | | | | ✅ | ✅ | ✅ |
+| DMR No-Recoil Mode | | | | | | ✅ | ✅ |
+| Weapon Tuning Panel | | | | | | ✅ | ✅ |
+| Keybind Reorganization | | | | | | ✅ | ✅ |
+| PUBG Mobile Script | | | | | | ✅ | ✅ |
+| RPD 7.62mm LMG Support | | | | | | | ✅ |
+| 65% Keyboard Layout Keybind Swap | | | | | | | ✅ |
+| Vaulted Weapons Cleanup (DP-28 & Bizon) | | | | | | | ✅ |
