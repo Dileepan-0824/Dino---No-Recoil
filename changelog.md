@@ -37,14 +37,9 @@ The format is structured in reverse-chronological order (newest release first) f
 * **Opening Headshot Lock (First 8 Ticks = 0.0)**: Ticks 1 to 8 (~130ms, opening 4–5 bullets) enforce strictly `0.0` horizontal compensation, ensuring initial snap-aim, crosshair placement, and opening headshots remain laser-centered without any lateral pull.
 * **Smooth Progressive Linear Ramp-In**: Ticks 9 to 20 fade the micro-bias in linearly (`(i - 8) / 12 * bias_strength`) rather than stepping abruptly, completely eliminating muzzle hitch.
 * **Master Horizontal Strength Slider**: Added `HorizontalStrength = 0.60` in the user configuration panel for quick global tuning (adjustable from `0.00` pure vertical to `1.00` full counter).
-* **Caliber-Aligned Compound Modifier System**: Unlocks multi-key modifier combinations on Mouse 4, 5, 6:
-  * Tier 7 (`+700`): `LCTRL + LALT`
-  * Tier 8 (`+800`): `LCTRL + LSHIFT`
-  * Tier 9 (`+900`): `LALT + LSHIFT`
-  * Tier 10 (`+1000`): `RCTRL + RALT`
-  * Tier 11 (`+1100`): `RALT + RSHIFT`
-  * Tier 12 (`+1200`): `RCTRL + RSHIFT`
-  * Gives every active weapon in the game an individual, collision-free slot.
+* **Full Dino V7 Muscle-Memory Keybind Parity**: Restored 100% exact keybind assignments for all 21 weapons from Dino V7 (including ACE32 on `RALT + Mouse 5`, GROZA on `LALT + Mouse 5`, K2 on `RCTRL + Mouse 5`, M249 on `ScrollLock + Mouse 4`, FAMAS on `RSHIFT + Mouse 4`, MG3 on `ScrollLock + Mouse 5`, and DMR on `RSHIFT + Mouse 5`).
+* **Compound Modifier System (+700 to +1200) for New Arsenal**: Mapped all remaining new weapons (Mini 14, Mk12, QBU, M16A4, SKS, SLR, Dragunov, Mk14, Mutant, RPD, Tommy Gun, VSS) onto collision-free compound tiers. Resolved AltGr / RALT hardware collision by re-binding Tier 7 (+700) to `LCTRL + LALT + LSHIFT`, completely isolating it from Right Alt.
+* **In-Game Sprint Isolation (Left Shift Safeguard)**: Excised `LSHIFT` from single weapon modifier selection in `GetModifierOffset()`. Tier 6 (+600) is strictly bound to `RSHIFT`, ensuring holding Left Shift to sprint or hold breath in-game will never collide with mouse clicks or cause accidental weapon switches.
 * **Dedicated PUBGIntel DMR Ballistics Engine**: Replaced generic single-tap compensation with individual per-weapon DMR profiles based directly on pubgintel.com data:
   * **Mini 14**: 16px pull, 3 steps, 6ms sleep, 170ms cadence.
   * **Mk12**: 15px pull, 3 steps, 6ms sleep, 170ms cadence (bipod-damped).

@@ -169,7 +169,7 @@ local WeaponTuner = {
 -- TIER  4 (+400)  : RALT + Mouse Button
 -- TIER  5 (+500)  : ScrollLock ON + Mouse Button
 -- TIER  6 (+600)  : RSHIFT + Mouse Button
--- TIER  7 (+700)  : LCTRL + LALT + Mouse Button
+-- TIER  7 (+700)  : LCTRL + LALT + LSHIFT + Mouse Button
 -- TIER  8 (+800)  : LCTRL + LSHIFT + Mouse Button
 -- TIER  9 (+900)  : LALT + LSHIFT + Mouse Button
 -- TIER 10 (+1000) : RCTRL + RALT + Mouse Button
@@ -180,46 +180,47 @@ local WeaponTuner = {
 -- =====================================================================================
 -- 4-SERIES: 5.56mm WEAPONS (ALL ASSIGNED TO MOUSE 4)
 -- =====================================================================================
-local BIND_M416     = 4     -- Mouse 4                   (5.56 AR - Meta)
-local BIND_AUG      = 104   -- LCTRL + Mouse 4          (5.56 AR - High RPM)
-local BIND_SCAR_L   = 204   -- LALT + Mouse 4           (5.56 AR - Stable)
-local BIND_G36C     = 304   -- RCTRL + Mouse 4          (5.56 AR - Low Recoil)
-local BIND_QBZ      = 404   -- RALT + Mouse 4           (5.56 AR - Sanhok)
-local BIND_FAMAS    = 504   -- ScrollLock + Mouse 4     (5.56 AR - 900 RPM Crate)
-local BIND_K2       = 604   -- RSHIFT + Mouse 4         (5.56 AR - Taego)
-local BIND_MINI14   = 704   -- LCTRL + LALT + Mouse 4   (5.56 DMR - 990 m/s)
+local BIND_M416     = 4     -- Mouse 4                   (5.56 AR - Meta) [V7]
+local BIND_AUG      = 104   -- LCTRL + Mouse 4          (5.56 AR - High RPM) [V7]
+local BIND_SCAR_L   = 204   -- LALT + Mouse 4           (5.56 AR - Stable) [V7]
+local BIND_G36C     = 304   -- RCTRL + Mouse 4          (5.56 AR - Low Recoil) [V7]
+local BIND_QBZ      = 404   -- RALT + Mouse 4           (5.56 AR - Sanhok) [V7]
+local BIND_M249     = 504   -- ScrollLock + Mouse 4     (5.56 LMG - 150-rd) [V7]
+local BIND_FAMAS    = 604   -- RSHIFT + Mouse 4         (5.56 AR - 900 RPM Crate) [V7]
+local BIND_MINI14   = 704   -- LCTRL + LALT + LSHIFT + Mouse 4 (5.56 DMR - 990 m/s)
 local BIND_MK12     = 804   -- LCTRL + LSHIFT + Mouse 4 (5.56 DMR - Bipod)
 local BIND_QBU      = 904   -- LALT + LSHIFT + Mouse 4  (5.56 DMR - Sanhok)
 local BIND_M16A4    = 1004  -- RCTRL + RALT + Mouse 4   (5.56 Burst AR)
-local BIND_M249     = 1104  -- RALT + RSHIFT + Mouse 4  (5.56 LMG - 150-rd)
+local BIND_MACRO_OFF_4 = 1104 -- RALT + RSHIFT + Mouse 4 (Master Macro OFF / Standby)
 
 -- =====================================================================================
--- 5-SERIES: 7.62mm WEAPONS (ALL ASSIGNED TO MOUSE 5)
+-- 5-SERIES: 7.62mm WEAPONS & EXTENDED ARs (ALL ASSIGNED TO MOUSE 5)
 -- =====================================================================================
-local BIND_BERRYL   = 5     -- Mouse 5                   (7.62 AR - Meta Monster)
-local BIND_AKM      = 105   -- LCTRL + Mouse 5          (7.62 AR - Heavy Punch)
-local BIND_ACE32    = 205   -- LALT + Mouse 5           (7.62 AR - Controllable)
-local BIND_GROZA    = 305   -- RCTRL + Mouse 5          (7.62 AR - Crate Beast)
-local BIND_MUTANT   = 405   -- RALT + Mouse 5           (7.62 Burst AR - 2-rd)
-local BIND_RPD      = 505   -- ScrollLock + Mouse 5     (7.62 LMG - 750 RPM)
-local BIND_MG3      = 605   -- RSHIFT + Mouse 5         (7.62 LMG - 990 RPM Crate)
-local BIND_SKS      = 705   -- LCTRL + LALT + Mouse 5   (7.62 DMR - Full Attachment)
+local BIND_BERRYL   = 5     -- Mouse 5                   (7.62 AR - Meta Monster) [V7]
+local BIND_AKM      = 105   -- LCTRL + Mouse 5          (7.62 AR - Heavy Punch) [V7]
+local BIND_GROZA    = 205   -- LALT + Mouse 5           (7.62 AR - Crate Beast) [V7]
+local BIND_K2       = 305   -- RCTRL + Mouse 5          (5.56 AR - Taego) [V7]
+local BIND_ACE32    = 405   -- RALT + Mouse 5           (7.62 AR - Controllable) [V7]
+local BIND_MG3      = 505   -- ScrollLock + Mouse 5     (7.62 LMG - 990 RPM Crate) [V7]
+local BIND_DMR      = 605   -- RSHIFT + Mouse 5         (Universal DMR Tap Assist) [V7]
+local BIND_SKS      = 705   -- LCTRL + LALT + LSHIFT + Mouse 5 (7.62 DMR - Full Attachment)
 local BIND_SLR      = 805   -- LCTRL + LSHIFT + Mouse 5 (7.62 DMR - Heavy Punch)
 local BIND_DRAGUNOV = 905   -- LALT + LSHIFT + Mouse 5  (7.62 DMR - 10.0 Kick SVD)
 local BIND_MK14     = 1005  -- RCTRL + RALT + Mouse 5   (7.62 DMR - Auto/Semi Crate)
-local BIND_MACRO_OFF_5 = 1105 -- RALT + RSHIFT + Mouse 5 (Master Macro OFF / Standby)
+local BIND_MUTANT   = 1105  -- RALT + RSHIFT + Mouse 5  (7.62 Burst AR - 2-rd)
+local BIND_RPD      = 1205  -- RCTRL + RSHIFT + Mouse 5 (7.62 LMG - 750 RPM)
 
 -- =====================================================================================
 -- 6-SERIES: SMGs, SPECIALS & STANDBY (ALL ASSIGNED TO MOUSE 6)
 -- =====================================================================================
-local BIND_MP5K     = 6     -- Mouse 6                   (9mm SMG - Versatile)
-local BIND_VECTOR   = 106   -- LCTRL + Mouse 6          (9mm SMG - 1100 RPM)
-local BIND_UMP45    = 206   -- LALT + Mouse 6           (9mm SMG - Laser)
-local BIND_JS9      = 306   -- RCTRL + Mouse 6          (9mm SMG - Rondo)
-local BIND_UZI      = 406   -- RALT + Mouse 6           (9mm SMG - 1250 RPM)
-local BIND_P90      = 506   -- ScrollLock + Mouse 6     (5.7mm SMG - Crate Laser)
-local BIND_MP9      = 606   -- RSHIFT + Mouse 6         (9mm SMG - Suppressed)
-local BIND_TOMMY    = 706   -- LCTRL + LALT + Mouse 6   (.45 ACP SMG - Drum)
+local BIND_MP5K     = 6     -- Mouse 6                   (9mm SMG - Versatile) [V7]
+local BIND_VECTOR   = 106   -- LCTRL + Mouse 6          (9mm SMG - 1100 RPM) [V7]
+local BIND_UMP45    = 206   -- LALT + Mouse 6           (9mm SMG - Laser) [V7]
+local BIND_JS9      = 306   -- RCTRL + Mouse 6          (9mm SMG - Rondo) [V7]
+local BIND_UZI      = 406   -- RALT + Mouse 6           (9mm SMG - 1250 RPM) [V7]
+local BIND_P90      = 506   -- ScrollLock + Mouse 6     (5.7mm SMG - Crate Laser) [V7]
+local BIND_MP9      = 606   -- RSHIFT + Mouse 6         (9mm SMG - Suppressed) [V7]
+local BIND_TOMMY    = 706   -- LCTRL + LALT + LSHIFT + Mouse 6 (.45 ACP SMG - Drum)
 local BIND_VSS      = 806   -- LCTRL + LSHIFT + Mouse 6 (9mm DMR - Subsonic Suppressed)
 local BIND_DMR_GEN  = 906   -- LALT + LSHIFT + Mouse 6  (Universal DMR Tap Assist)
 local BIND_MACRO_OFF_6 = 1006 -- RCTRL + RALT + Mouse 6 (Master Macro OFF / Standby)
@@ -476,6 +477,10 @@ local Weapons = {
         tuner = WeaponTuner.VSS
     },
     [BIND_DMR_GEN] = {
+        name = "DMR Generic", type = "DMR", caliber = "Universal", rpm = 330,
+        tuner = WeaponTuner.DMR_GEN
+    },
+    [BIND_DMR] = {
         name = "DMR Generic", type = "DMR", caliber = "Universal", rpm = 330,
         tuner = WeaponTuner.DMR_GEN
     },
@@ -811,8 +816,10 @@ local function GetModifierOffset()
     local is_rshift = IsModifierPressed("rshift")
     local is_scroll = IsKeyLockOn("scrolllock")
 
-    -- Check dual-modifier tiers first
-    if is_rctrl and is_rshift then
+    -- Check multi-modifier tiers first (3-key check before 2-key checks)
+    if is_lctrl and is_lalt and is_lshift then
+        return 700  -- Tier 7 (LCTRL + LALT + LSHIFT - isolated from RALT/AltGr)
+    elseif is_rctrl and is_rshift then
         return 1200 -- Tier 12
     elseif is_ralt and is_rshift then
         return 1100 -- Tier 11
@@ -822,21 +829,19 @@ local function GetModifierOffset()
         return 900  -- Tier 9
     elseif is_lctrl and is_lshift then
         return 800  -- Tier 8
-    elseif is_lctrl and is_lalt then
-        return 700  -- Tier 7
-    -- Check single-modifier tiers
+    -- Check single-modifier tiers (RSHIFT strictly; Left Shift alone is reserved for in-game sprint)
     elseif is_rshift then
-        return 600  -- Tier 6
+        return 600  -- Tier 6 (RSHIFT only - FAMAS / DMR / MP9) [V7]
     elseif is_scroll then
-        return 500  -- Tier 5
+        return 500  -- Tier 5 (ScrollLock - M249 / MG3 / P90) [V7]
     elseif is_ralt then
-        return 400  -- Tier 4
+        return 400  -- Tier 4 (RALT / AltGr - QBZ / ACE32 / UZI) [V7]
     elseif is_rctrl then
-        return 300  -- Tier 3
+        return 300  -- Tier 3 (RCTRL - G36C / K2 / JS9) [V7]
     elseif is_lalt then
-        return 200  -- Tier 2
+        return 200  -- Tier 2 (LALT - SCAR-L / GROZA / UMP45) [V7]
     elseif is_lctrl then
-        return 100  -- Tier 1
+        return 100  -- Tier 1 (LCTRL - AUG / AKM / VECTOR) [V7]
     end
 
     return 0 -- Tier 0 (No modifier)
@@ -858,7 +863,7 @@ local function SetMacroActive(enable)
 end
 
 local function SelectWeapon(bind_id)
-    if bind_id == BIND_MACRO_OFF or bind_id == BIND_MACRO_OFF_5 or bind_id == BIND_MACRO_OFF_6 then
+    if bind_id == BIND_MACRO_OFF or bind_id == BIND_MACRO_OFF_4 or bind_id == BIND_MACRO_OFF_6 then
         SetMacroActive(false)
         current_weapon = nil
         current_weapon_id = nil

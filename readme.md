@@ -49,7 +49,7 @@ Calibrated against data-mined weapon metrics from **PUBGIntel**, Dino accounts f
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                       LOGITECH G HUB EVENT DISPATCHER                       │
-│              (Left Click / Compound Modifiers / Direct Standby)              │
+│              (Left Click / Compound Modifiers / Direct Standby)             │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │
                                        ▼
@@ -105,7 +105,7 @@ Pressing **Mouse Button 3 (Middle Click)** instantly deactivates the macro and s
 | :--- | :--- |
 | **Comprehensive 32-Weapon Arsenal** | 13 Assault Rifles, 8 SMGs, 3 LMGs, 8 Dedicated DMRs with individually data-mined ballistic profiles. |
 | **Dedicated PUBGIntel DMR Engine** | Per-weapon single-tap compensation for Mini 14, Mk12, QBU, SKS, SLR, Dragunov, Mk14, and VSS with auto-tap cadence. |
-| **Caliber-Aligned Compound Modifiers** | Ergonomically grouped into 4-Series (5.56mm), 5-Series (7.62mm), and 6-Series (SMGs/DMRs) across tiers `+0` to `+1200`. |
+| **Caliber-Aligned Compound Modifiers** | Ergonomically grouped into 4-Series (5.56mm), 5-Series (7.62mm), and 6-Series (SMGs/Universal) across 12 collision-free tiers. |
 | **Burst-Fire Weapon System** | Dedicated compensation for Mk47 Mutant (2-round burst) and M16A4 (3-round burst) with rapid auto-cycling. |
 | **Dynamic Stance & Attachment Scaling** | Live polling of `LCTRL` (crouch: -20%), `LSHIFT` (steady aim: -10%), and `NUMLOCK` (attachments: -22%). |
 | **Burst Memory & Spray Transfer** | Resumes recoil curve if re-clicking within 380ms; automatically detects target transfer after long sprays. |
@@ -156,13 +156,13 @@ To ensure flawless 1:1 hardware tracking and laser precision, configure these se
 
 ## Modifier Keybind System
 
-All 32 weapons are assigned unique, collision-free slots using **Mouse Buttons 4, 5, 6** combined with **single and compound modifier keys**.
+All 32 weapons are mapped using **Mouse Buttons 4, 5, 6** combined with single and compound modifier keys. Fully accessible with zero keybind collisions.
 
-### Compound Modifier Offset Table
+### Modifier Offset Table
 
 ```
 Tier 0 (+0)    : Clean Mouse Button
-Tier 1 (+100)  : LCTRL   + Mouse Button       Tier 7  (+700)  : LCTRL + LALT   + Mouse Button
+Tier 1 (+100)  : LCTRL   + Mouse Button       Tier 7  (+700)  : LCTRL + LALT + LSHIFT + Mouse Button
 Tier 2 (+200)  : LALT    + Mouse Button       Tier 8  (+800)  : LCTRL + LSHIFT + Mouse Button
 Tier 3 (+300)  : RCTRL   + Mouse Button       Tier 9  (+900)  : LALT  + LSHIFT + Mouse Button
 Tier 4 (+400)  : RALT    + Mouse Button       Tier 10 (+1000) : RCTRL + RALT   + Mouse Button
@@ -170,43 +170,47 @@ Tier 5 (+500)  : SCROLL  + Mouse Button       Tier 11 (+1100) : RALT  + RSHIFT +
 Tier 6 (+600)  : RSHIFT  + Mouse Button       Tier 12 (+1200) : RCTRL + RSHIFT + Mouse Button
 ```
 
+> **Note**: Tier 6 strictly uses **RSHIFT** so Left Shift remains 100% dedicated to in-game sprinting without accidental weapon switches. Tier 7 uses **LCTRL + LALT + LSHIFT** to completely prevent collision with RALT / AltGr.  
+> **Direct Standby**: Press **Middle Click (Button 3)** anytime to toggle the macro ON / OFF instantly.
+
 ---
 
 ### 4-Series: 5.56mm Weapons (Assigned to Mouse 4)
 
 | Weapon | Keybinding Combo | Bind Value | Category | Profile Details |
 | :--- | :--- | :---: | :--- | :--- |
-| **M416** | `Mouse 4` | `4` | 5.56 AR | Meta laser anchor (700 RPM) |
-| **AUG** | `LCTRL + Mouse 4` | `104` | 5.56 AR | High RPM world spawn (750 RPM) |
-| **SCAR-L** | `LALT + Mouse 4` | `204` | 5.56 AR | Ultra-stable mid-range (625 RPM) |
-| **G36C** | `RCTRL + Mouse 4` | `304` | 5.56 AR | Vikendi / Taego laser (650 RPM) |
-| **QBZ** | `RALT + Mouse 4` | `404` | 5.56 AR | Sanhok native rifle (650 RPM) |
-| **FAMAS** | `ScrollLock + Mouse 4` | `504` | 5.56 AR | Crate beast (900 RPM) |
-| **K2** | `RSHIFT + Mouse 4` | `604` | 5.56 AR | Taego balanced AR (700 RPM) |
-| **Mini 14** | `LCTRL + LALT + Mouse 4` | `704` | 5.56 DMR | Rapid 990 m/s laser tap |
+| **M416** | `Mouse 4` | `4` | 5.56 AR | Meta laser anchor (700 RPM) [V7] |
+| **AUG** | `LCTRL + Mouse 4` | `104` | 5.56 AR | High RPM world spawn (750 RPM) [V7] |
+| **SCAR-L** | `LALT + Mouse 4` | `204` | 5.56 AR | Ultra-stable mid-range (625 RPM) [V7] |
+| **G36C** | `RCTRL + Mouse 4` | `304` | 5.56 AR | Vikendi / Taego laser (650 RPM) [V7] |
+| **QBZ** | `RALT + Mouse 4` | `404` | 5.56 AR | Sanhok native rifle (650 RPM) [V7] |
+| **M249** | `ScrollLock + Mouse 4` | `504` | 5.56 LMG | 150-round sustained suppression [V7] |
+| **FAMAS** | `RSHIFT + Mouse 4` | `604` | 5.56 AR | Crate beast (900 RPM) [V7] |
+| **Mini 14** | `LCTRL + LALT + LSHIFT + Mouse 4` | `704` | 5.56 DMR | Rapid 990 m/s laser tap |
 | **Mk12** | `LCTRL + LSHIFT + Mouse 4` | `804` | 5.56 DMR | Integrated bipod DMR |
 | **QBU** | `LALT + LSHIFT + Mouse 4` | `904` | 5.56 DMR | Sanhok rapid DMR |
 | **M16A4** | `RCTRL + RALT + Mouse 4` | `1004` | 5.56 Burst | 3-round rapid burst engine |
-| **M249** | `RALT + RSHIFT + Mouse 4` | `1104` | 5.56 LMG | 150-round sustained suppression |
+| **Standby / Off** | `RALT + RSHIFT + Mouse 4` | `1104` | System | Master Macro OFF / Standby |
 
 ---
 
-### 5-Series: 7.62mm Weapons (Assigned to Mouse 5)
+### 5-Series: 7.62mm Weapons & Extended ARs (Assigned to Mouse 5)
 
 | Weapon | Keybinding Combo | Bind Value | Category | Profile Details |
 | :--- | :--- | :---: | :--- | :--- |
-| **Beryl M762** | `Mouse 5` | `5` | 7.62 AR | Heavy meta monster (700 RPM) |
-| **AKM** | `LCTRL + Mouse 5` | `105` | 7.62 AR | High damage punch (600 RPM) |
-| **ACE32** | `LALT + Mouse 5` | `205` | 7.62 AR | Fully attachable 7.62 (680 RPM) |
-| **GROZA** | `RCTRL + Mouse 5` | `305` | 7.62 AR | Crate monster (750 RPM) |
-| **Mk47 Mutant** | `RALT + Mouse 5` | `405` | 7.62 Burst | 2-round heavy burst engine |
-| **RPD** | `ScrollLock + Mouse 5` | `505` | 7.62 LMG | 750 RPM drum LMG |
-| **MG3** | `RSHIFT + Mouse 5` | `605` | 7.62 LMG | 660 / 990 RPM crate LMG |
-| **SKS** | `LCTRL + LALT + Mouse 5` | `705` | 7.62 DMR | Quad-attachment DMR |
+| **Beryl M762** | `Mouse 5` | `5` | 7.62 AR | Heavy meta monster (700 RPM) [V7] |
+| **AKM** | `LCTRL + Mouse 5` | `105` | 7.62 AR | High damage punch (600 RPM) [V7] |
+| **GROZA** | `LALT + Mouse 5` | `205` | 7.62 AR | Crate monster (750 RPM) [V7] |
+| **K2** | `RCTRL + Mouse 5` | `305` | 5.56 AR | Taego balanced AR (700 RPM) [V7] |
+| **ACE32** | `RALT + Mouse 5` | `405` | 7.62 AR | Fully attachable 7.62 (680 RPM) [V7] |
+| **MG3** | `ScrollLock + Mouse 5` | `505` | 7.62 LMG | 660 / 990 RPM crate LMG [V7] |
+| **DMR Generic** | `RSHIFT + Mouse 5` | `605` | Universal | Universal DMR tap assist [V7] |
+| **SKS** | `LCTRL + LALT + LSHIFT + Mouse 5` | `705` | 7.62 DMR | Quad-attachment DMR |
 | **SLR** | `LCTRL + LSHIFT + Mouse 5` | `805` | 7.62 DMR | High damage DMR punch |
 | **Dragunov SVD** | `LALT + LSHIFT + Mouse 5` | `905` | 7.62 DMR | Heavy 1-shot potential DMR |
 | **Mk14 EBR** | `RCTRL + RALT + Mouse 5` | `1005` | 7.62 DMR | Crate 700 RPM DMR monster |
-| **Standby / Off** | `RALT + RSHIFT + Mouse 5` | `1105` | System | Master Macro OFF / Standby |
+| **Mk47 Mutant** | `RALT + RSHIFT + Mouse 5` | `1105` | 7.62 Burst | 2-round heavy burst engine |
+| **RPD** | `RCTRL + RSHIFT + Mouse 5` | `1205` | 7.62 LMG | 750 RPM drum LMG |
 
 ---
 
@@ -214,14 +218,14 @@ Tier 6 (+600)  : RSHIFT  + Mouse Button       Tier 12 (+1200) : RCTRL + RSHIFT +
 
 | Weapon | Keybinding Combo | Bind Value | Category | Profile Details |
 | :--- | :--- | :---: | :--- | :--- |
-| **MP5K** | `Mouse 6` | `6` | 9mm SMG | 900 RPM all-rounder |
-| **Vector** | `LCTRL + Mouse 6` | `106` | 9mm SMG | Blistering 1100 RPM laser |
-| **UMP45** | `LALT + Mouse 6` | `206` | 9mm SMG | Ultra-stable close-range laser |
-| **JS9** | `RCTRL + Mouse 6` | `306` | 9mm SMG | Rondo 9mm high-damage SMG |
-| **Micro UZI** | `RALT + Mouse 6` | `406` | 9mm SMG | Extreme 1250 RPM hip/ADS |
-| **P90** | `ScrollLock + Mouse 6` | `506` | 5.7mm SMG | Crate laser with integral optics |
-| **MP9** | `RSHIFT + Mouse 6` | `606` | 9mm SMG | Integrated suppressor & laser |
-| **Tommy Gun** | `LCTRL + LALT + Mouse 6` | `706` | .45 SMG | High-capacity drum SMG |
+| **MP5K** | `Mouse 6` | `6` | 9mm SMG | 900 RPM all-rounder [V7] |
+| **Vector** | `LCTRL + Mouse 6` | `106` | 9mm SMG | Blistering 1100 RPM laser [V7] |
+| **UMP45** | `LALT + Mouse 6` | `206` | 9mm SMG | Ultra-stable close-range laser [V7] |
+| **JS9** | `RCTRL + Mouse 6` | `306` | 9mm SMG | Rondo 9mm high-damage SMG [V7] |
+| **Micro UZI** | `RALT + Mouse 6` | `406` | 9mm SMG | Extreme 1250 RPM hip/ADS [V7] |
+| **P90** | `ScrollLock + Mouse 6` | `506` | 5.7mm SMG | Crate laser with integral optics [V7] |
+| **MP9** | `RSHIFT + Mouse 6` | `606` | 9mm SMG | Integrated suppressor & laser [V7] |
+| **Tommy Gun** | `LCTRL + LALT + LSHIFT + Mouse 6` | `706` | .45 SMG | High-capacity drum SMG |
 | **VSS Vintorez** | `LCTRL + LSHIFT + Mouse 6` | `806` | 9mm DMR | Subsonic integrally suppressed |
 | **DMR Generic** | `LALT + LSHIFT + Mouse 6` | `906` | Universal | Universal DMR tap assist |
 | **Standby / Off** | `RCTRL + RALT + Mouse 6` | `1006` | System | Master Macro OFF / Standby |
