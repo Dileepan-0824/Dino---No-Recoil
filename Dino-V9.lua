@@ -14,7 +14,7 @@
 -------------------------------------------------------------------------------------------------------------------------
 
 local MOUSE_DPI = 800
-local SensSetting = 1.20
+local SensSetting = 1.00
 
 -- Feature Toggles
 local EnableCrouchMode = true
@@ -28,11 +28,11 @@ local DMR_AUTO_TAP = true        -- True = Auto-cycling on hold
 local HorizontalStrength = 0.60  -- Master horizontal bias multiplier (0.00 to 1.00)
 
 -- State Management
-local WEAPON_TOGGLE_MODE = "ANY" -- "ANY" = any bound key toggles standby, "SAME" = toggle current
-local DIRECT_MACRO_OFF_BUTTON = nil
-local SYNC_CAPSLOCK_LED = true
-local REQUIRE_CAPSLOCK_FOR_FIRE = false
-local ENABLE_LOGGING = true
+local WEAPON_TOGGLE_MODE        = "ANY"   -- "ANY" = any weapon button toggles standby, "SAME" = current button only
+local DIRECT_MACRO_OFF_BUTTON   = nil     -- Instant standby mouse button (e.g. 3 for Middle Mouse Click, or nil)
+local SYNC_CAPSLOCK_LED         = true    -- Sync physical CapsLock LED with macro active/standby state
+local REQUIRE_CAPSLOCK_FOR_FIRE = false   -- Hardware safety: true requires CapsLock ON to pull recoil
+local ENABLE_LOGGING            = true    -- Print telemetry and weapon profiles to G Hub console
 
 -------------------------------------------------------------------------------------------------------------------------
 -- [2] WEAPON TUNING PROFILES
@@ -78,12 +78,26 @@ local WeaponTuner = {
     MK12     = { stand = 1.00, crouch = 0.75, att_scale = 0.76, pull = 16, h_pull = 0.0, steps = 3, sleep = 6,  delay = 170 },
     QBU      = { stand = 1.00, crouch = 0.75, att_scale = 0.80, pull = 17, h_pull = 0.0, steps = 3, sleep = 6,  delay = 170 },
     VSS      = { stand = 2.25, crouch = 1.80, att_scale = 0.85, h_bias =  0.000, is_smg = true },
-    DMR_GEN  = { stand = 1.00, crouch = 0.80, att_scale = 0.78, pull = 24, h_pull = 0.0, steps = 4, sleep = 8,  delay = 180 },
 }
 
 -------------------------------------------------------------------------------------------------------------------------
 -- [3] KEYBINDINGS
 -------------------------------------------------------------------------------------------------------------------------
+
+-- MODIFIER TIER TABLE:
+-- TIER  0 (+0)    : None (Mouse Button only)
+-- TIER  1 (+100)  : LCTRL + Mouse Button
+-- TIER  2 (+200)  : LALT + Mouse Button
+-- TIER  3 (+300)  : RCTRL + Mouse Button
+-- TIER  4 (+400)  : RALT + Mouse Button
+-- TIER  5 (+500)  : ScrollLock ON + Mouse Button
+-- TIER  6 (+600)  : RSHIFT + Mouse Button
+-- TIER  7 (+700)  : LCTRL + LALT + LSHIFT + Mouse Button
+-- TIER  8 (+800)  : LCTRL + LSHIFT + Mouse Button
+-- TIER  9 (+900)  : LALT + LSHIFT + Mouse Button
+-- TIER 10 (+1000) : RCTRL + RALT + Mouse Button
+-- TIER 11 (+1100) : RALT + RSHIFT + Mouse Button
+-- TIER 12 (+1200) : RCTRL + RSHIFT + Mouse Button
 
 -- 4-Series: Mouse Button 4 (5.56mm Arsenal)
 local BIND_M416        = 4     -- Mouse 4
@@ -91,13 +105,12 @@ local BIND_AUG         = 104   -- LCTRL + Mouse 4
 local BIND_SCAR_L      = 204   -- LALT + Mouse 4
 local BIND_G36C        = 304   -- RCTRL + Mouse 4
 local BIND_QBZ         = 404   -- RALT + Mouse 4
-local BIND_M249        = 504   -- ScrollLock + Mouse 4
 local BIND_FAMAS       = 604   -- RSHIFT + Mouse 4
-local BIND_MINI14      = 704   -- LCTRL + LALT + LSHIFT + Mouse 4
+local BIND_QBU         = 704   -- LCTRL + LALT + LSHIFT + Mouse 4
 local BIND_MK12        = 804   -- LCTRL + LSHIFT + Mouse 4
-local BIND_QBU         = 904   -- LALT + LSHIFT + Mouse 4
+local BIND_MINI14      = 904   -- LALT + LSHIFT + Mouse 4
 local BIND_M16A4       = 1004  -- RCTRL + RALT + Mouse 4
-local BIND_MACRO_OFF_4 = 1104  -- RALT + RSHIFT + Mouse 4
+local BIND_M249        = 1104  -- RALT + RSHIFT + Mouse 4
 
 -- 5-Series: Mouse Button 5 (7.62mm Arsenal)
 local BIND_BERRYL      = 5     -- Mouse 5
@@ -105,8 +118,7 @@ local BIND_AKM         = 105   -- LCTRL + Mouse 5
 local BIND_GROZA       = 205   -- LALT + Mouse 5
 local BIND_K2          = 305   -- RCTRL + Mouse 5
 local BIND_ACE32       = 405   -- RALT + Mouse 5
-local BIND_MG3         = 505   -- ScrollLock + Mouse 5
-local BIND_DMR         = 605   -- RSHIFT + Mouse 5
+local BIND_MG3         = 605   -- RSHIFT + Mouse 5
 local BIND_SKS         = 705   -- LCTRL + LALT + LSHIFT + Mouse 5
 local BIND_SLR         = 805   -- LCTRL + LSHIFT + Mouse 5
 local BIND_DRAGUNOV    = 905   -- LALT + LSHIFT + Mouse 5
@@ -114,19 +126,16 @@ local BIND_MK14        = 1005  -- RCTRL + RALT + Mouse 5
 local BIND_MUTANT      = 1105  -- RALT + RSHIFT + Mouse 5
 local BIND_RPD         = 1205  -- RCTRL + RSHIFT + Mouse 5
 
--- 6-Series: Mouse Button 6 (SMGs, VSS, Standby)
+-- 6-Series: Mouse Button 6 (SMGs, VSS)
 local BIND_MP5K        = 6     -- Mouse 6
 local BIND_VECTOR      = 106   -- LCTRL + Mouse 6
 local BIND_UMP45       = 206   -- LALT + Mouse 6
 local BIND_JS9         = 306   -- RCTRL + Mouse 6
 local BIND_UZI         = 406   -- RALT + Mouse 6
-local BIND_P90         = 506   -- ScrollLock + Mouse 6
 local BIND_MP9         = 606   -- RSHIFT + Mouse 6
-local BIND_TOMMY       = 706   -- LCTRL + LALT + LSHIFT + Mouse 6
 local BIND_VSS         = 806   -- LCTRL + LSHIFT + Mouse 6
-local BIND_DMR_GEN     = 906   -- LALT + LSHIFT + Mouse 6
-local BIND_MACRO_OFF_6 = 1006  -- RCTRL + RALT + Mouse 6
-local BIND_MACRO_OFF   = 1106  -- RALT + RSHIFT + Mouse 6
+local BIND_TOMMY       = 906   -- LALT + LSHIFT + Mouse 6
+local BIND_P90         = 1006  -- RCTRL + RALT + Mouse 6
 
 -- Logitech G Keyboard Direct Mappings
 local KeyboardBinds = {
@@ -141,7 +150,7 @@ local KeyboardBinds = {
     [9]  = BIND_MP5K,
     [10] = BIND_VECTOR,
     [11] = BIND_M249,
-    [12] = BIND_MACRO_OFF,
+    [12] = 0, -- Standby / Macro Off
 }
 
 -------------------------------------------------------------------------------------------------------------------------
@@ -375,14 +384,6 @@ local Weapons = {
         v_curve = GenerateBaseSpray(7.0, 9.5, 10.8, 350),
         h_curve = GenerateHorizontalBias(WeaponTuner.VSS.h_bias, 350),
         tuner = WeaponTuner.VSS
-    },
-    [BIND_DMR_GEN] = {
-        name = "DMR Generic", type = "DMR", caliber = "Universal", rpm = 330,
-        tuner = WeaponTuner.DMR_GEN
-    },
-    [BIND_DMR] = {
-        name = "DMR Generic", type = "DMR", caliber = "Universal", rpm = 330,
-        tuner = WeaponTuner.DMR_GEN
     },
 }
 
@@ -734,7 +735,7 @@ local function SetMacroActive(enable)
 end
 
 local function SelectWeapon(bind_id)
-    if bind_id == BIND_MACRO_OFF or bind_id == BIND_MACRO_OFF_4 or bind_id == BIND_MACRO_OFF_6 then
+    if not bind_id or bind_id == 0 then
         SetMacroActive(false)
         current_weapon = nil
         current_weapon_id = nil
