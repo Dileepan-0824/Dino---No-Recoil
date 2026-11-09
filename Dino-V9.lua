@@ -41,23 +41,23 @@ local ENABLE_LOGGING            = true    -- Print telemetry and weapon profiles
 local WeaponTuner = {
     -- Assault Rifles
     M416     = { stand = 2.85, crouch = 2.28, att_scale = 0.78, h_bias =  0.035 },
-    BERRYL   = { stand = 3.87, crouch = 3.09, att_scale = 0.75, h_bias =  0.060, is_762 = true },
-    AKM      = { stand = 3.60, crouch = 2.88, att_scale = 0.85, h_bias =  0.075, is_762 = true },
-    AUG      = { stand = 2.90, crouch = 2.32, att_scale = 0.78, h_bias =  0.025 },
-    ACE32    = { stand = 3.60, crouch = 2.88, att_scale = 0.76, h_bias =  0.050, is_762 = true },
+    BERRYL   = { stand = 3.48, crouch = 2.72, att_scale = 0.75, h_bias =  0.060, is_762 = true },
+    AKM      = { stand = 3.20, crouch = 2.50, att_scale = 0.85, h_bias =  0.075, is_762 = true },
+    AUG      = { stand = 3.16, crouch = 2.46, att_scale = 0.78, h_bias =  0.025 },
+    ACE32    = { stand = 3.00, crouch = 2.28, att_scale = 0.76, h_bias =  0.050, is_762 = true },
     SCAR_L   = { stand = 2.69, crouch = 2.15, att_scale = 0.78, h_bias = -0.035 },
     QBZ      = { stand = 2.79, crouch = 2.23, att_scale = 0.78, h_bias = -0.015 },
     G36C     = { stand = 2.63, crouch = 2.11, att_scale = 0.78, h_bias = -0.035 },
     K2       = { stand = 2.90, crouch = 2.32, att_scale = 0.82, h_bias =  0.025 },
-    GROZA    = { stand = 3.97, crouch = 3.18, att_scale = 0.88, h_bias =  0.040, is_762 = true },
-    FAMAS    = { stand = 3.17, crouch = 2.53, att_scale = 0.85, h_bias =  0.000 },
+    GROZA    = { stand = 3.25, crouch = 2.48, att_scale = 0.88, h_bias =  0.040, is_762 = true },
+    FAMAS    = { stand = 3.17, crouch = 2.43, att_scale = 0.85, h_bias =  0.000 },
     MUTANT   = { stand = 3.44, crouch = 2.75, att_scale = 0.76, h_bias =  0.000, is_762 = true },
     M16A4    = { stand = 2.69, crouch = 2.15, att_scale = 0.78, h_bias =  0.000 },
 
     -- Submachine Guns
-    UMP45    = { stand = 2.09, crouch = 1.68, att_scale = 0.78, h_bias =  0.000, is_smg = true },
-    VECTOR   = { stand = 2.52, crouch = 2.02, att_scale = 0.75, h_bias = -0.020, is_smg = true },
-    UZI      = { stand = 2.31, crouch = 1.85, att_scale = 0.78, h_bias = -0.020, is_smg = true },
+    UMP45    = { stand = 2.19, crouch = 1.78, att_scale = 0.78, h_bias =  0.000, is_smg = true },
+    VECTOR   = { stand = 2.78, crouch = 2.26, att_scale = 0.75, h_bias = -0.020, is_smg = true },
+    UZI      = { stand = 2.11, crouch = 1.65, att_scale = 0.78, h_bias = -0.020, is_smg = true },
     MP5K     = { stand = 2.36, crouch = 1.89, att_scale = 0.75, h_bias =  0.020, is_smg = true },
     TOMMY    = { stand = 2.42, crouch = 1.93, att_scale = 0.85, h_bias =  0.000, is_smg = true },
     P90      = { stand = 2.31, crouch = 1.85, att_scale = 1.00, h_bias =  0.000, is_smg = true },
@@ -65,9 +65,9 @@ local WeaponTuner = {
     JS9      = { stand = 2.31, crouch = 1.85, att_scale = 0.78, h_bias =  0.015, is_smg = true },
 
     -- Light Machine Guns
-    M249     = { stand = 2.42, crouch = 1.40, att_scale = 0.88, h_bias =  0.035 },
-    MG3      = { stand = 2.58, crouch = 1.45, att_scale = 1.00, h_bias = -0.020, is_762 = true },
-    RPD      = { stand = 2.74, crouch = 1.72, att_scale = 0.82, h_bias =  0.045, is_762 = true },
+    M249     = { stand = 2.00, crouch = 1.05, att_scale = 0.88, h_bias =  0.015 },
+    MG3      = { stand = 1.92, crouch = 0.90, att_scale = 1.00, h_bias = -0.020, is_762 = true },
+    RPD      = { stand = 2.25, crouch = 1.30, att_scale = 0.82, h_bias = -0.010, is_762 = true },
 
     -- Designated Marksman Rifles
     DRAGUNOV = { stand = 1.00, crouch = 0.80, att_scale = 0.82, pull = 36, h_pull = 0.0, steps = 4, sleep = 10, delay = 250 },
@@ -207,25 +207,25 @@ local Weapons = {
     },
     [BIND_BERRYL] = {
         name = "Beryl M762", type = "AUTO", caliber = "7.62", rpm = 700, tick_ms = 17,
-        v_curve = GenerateBaseSpray(12.5, 17.5, 19.0, 350),
+        v_curve = GenerateBaseSpray(11.8, 16.2, 17.6, 350),
         h_curve = GenerateHorizontalBias(WeaponTuner.BERRYL.h_bias, 350),
         tuner = WeaponTuner.BERRYL
     },
     [BIND_AKM] = {
         name = "AKM", type = "AUTO", caliber = "7.62", rpm = 600, tick_ms = 20,
-        v_curve = GenerateBaseSpray(13.0, 17.0, 18.5, 320),
+        v_curve = GenerateBaseSpray(12.0, 15.6, 17.0, 320),
         h_curve = GenerateHorizontalBias(WeaponTuner.AKM.h_bias, 320),
         tuner = WeaponTuner.AKM
     },
     [BIND_AUG] = {
         name = "AUG", type = "AUTO", caliber = "5.56", rpm = 750, tick_ms = 16,
-        v_curve = GenerateBaseSpray(9.0, 12.0, 13.5, 350),
+        v_curve = GenerateBaseSpray(9.2, 12.6, 14.2, 350),
         h_curve = GenerateHorizontalBias(WeaponTuner.AUG.h_bias, 350),
         tuner = WeaponTuner.AUG
     },
     [BIND_ACE32] = {
         name = "ACE32", type = "AUTO", caliber = "7.62", rpm = 680, tick_ms = 17,
-        v_curve = GenerateBaseSpray(12.0, 16.5, 18.0, 350),
+        v_curve = GenerateBaseSpray(11.0, 15.0, 16.4, 350),
         h_curve = GenerateHorizontalBias(WeaponTuner.ACE32.h_bias, 350),
         tuner = WeaponTuner.ACE32
     },
@@ -255,7 +255,7 @@ local Weapons = {
     },
     [BIND_GROZA] = {
         name = "GROZA", type = "AUTO", caliber = "7.62", rpm = 750, tick_ms = 16,
-        v_curve = GenerateBaseSpray(13.0, 18.0, 20.0, 350),
+        v_curve = GenerateBaseSpray(12.0, 16.4, 18.0, 350),
         h_curve = GenerateHorizontalBias(WeaponTuner.GROZA.h_bias, 350),
         tuner = WeaponTuner.GROZA
     },
@@ -287,7 +287,7 @@ local Weapons = {
     },
     [BIND_VECTOR] = {
         name = "Vector", type = "AUTO", caliber = "9mm", rpm = 1100, tick_ms = 11,
-        v_curve = GenerateBaseSpray(7.5, 10.2, 11.5, 400),
+        v_curve = GenerateBaseSpray(7.6, 10.8, 12.2, 400),
         h_curve = GenerateHorizontalBias(WeaponTuner.VECTOR.h_bias, 400),
         tuner = WeaponTuner.VECTOR
     },
@@ -331,19 +331,19 @@ local Weapons = {
     -- Light Machine Guns
     [BIND_M249] = {
         name = "M249", type = "AUTO", caliber = "5.56", rpm = 800, tick_ms = 15,
-        v_curve = GenerateBaseSpray(9.2, 13.0, 15.0, 550),
+        v_curve = GenerateBaseSpray(8.5, 11.5, 13.0, 550),
         h_curve = GenerateHorizontalBias(WeaponTuner.M249.h_bias, 550),
         tuner = WeaponTuner.M249
     },
     [BIND_MG3] = {
         name = "MG3", type = "AUTO", caliber = "7.62", rpm = 990, tick_ms = 12,
-        v_curve = GenerateBaseSpray(10.0, 14.0, 16.0, 650),
+        v_curve = GenerateBaseSpray(8.0, 11.2, 12.8, 650),
         h_curve = GenerateHorizontalBias(WeaponTuner.MG3.h_bias, 650),
         tuner = WeaponTuner.MG3
     },
     [BIND_RPD] = {
         name = "RPD", type = "AUTO", caliber = "7.62", rpm = 750, tick_ms = 16,
-        v_curve = GenerateBaseSpray(11.0, 15.0, 17.0, 500),
+        v_curve = GenerateBaseSpray(9.2, 12.5, 14.0, 500),
         h_curve = GenerateHorizontalBias(WeaponTuner.RPD.h_bias, 500),
         tuner = WeaponTuner.RPD
     },
