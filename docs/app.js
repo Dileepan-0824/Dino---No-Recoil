@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const val = parseInt(this.value, 10);
       const floatVal = (val / 100).toFixed(2);
       configState.horizontal = parseFloat(floatVal);
-      sliderDisplay.textContent = floatVal + ' (' + val + '%)';
+      sliderDisplay.textContent = val + '%';
       renderLiveCode();
     });
   }
@@ -190,7 +190,7 @@ local ENABLE_LOGGING            = ${configState.logging}   -- Telemetry to G Hub
       // Reset slider
       if (slider && sliderDisplay) {
         slider.value = 60;
-        sliderDisplay.textContent = '0.60 (60%)';
+        sliderDisplay.textContent = '60%';
       }
 
       // Reset segmented controls

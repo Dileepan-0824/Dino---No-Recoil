@@ -704,9 +704,10 @@ a:hover {
 }
 
 .tab-btn.active {
-  background: var(--pubg-gold);
+  background: var(--tactical-cyan);
   color: #000000;
-  border-color: var(--pubg-gold);
+  border-color: var(--tactical-cyan);
+  box-shadow: 0 0 10px var(--tactical-cyan-glow);
 }
 
 .tabs-content {
@@ -892,12 +893,20 @@ a:hover {
   gap: 18px;
 }
 
-.toggle-row, .control-row {
+.toggle-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
   padding: 6px 0;
+}
+
+.control-row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 8px 0;
 }
 
 .toggle-info {
@@ -984,23 +993,25 @@ a:hover {
 
 /* Segmented Control */
 .segmented-control {
-  display: inline-flex;
+  display: flex;
+  width: 100%;
   background: #0d1017;
   border: 1px solid var(--border-tactical);
   border-radius: var(--radius-sm);
-  padding: 2px;
-  gap: 2px;
-  flex-shrink: 0;
+  padding: 3px;
+  gap: 3px;
 }
 
 .seg-btn {
+  flex: 1;
+  text-align: center;
   background: transparent;
   border: none;
   color: var(--text-muted);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.04em;
-  padding: 6px 10px;
+  padding: 7px 8px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition);
@@ -1012,8 +1023,9 @@ a:hover {
 }
 
 .seg-btn.active {
-  background: var(--pubg-gold);
+  background: var(--tactical-cyan);
   color: #000000;
+  box-shadow: 0 0 10px var(--tactical-cyan-glow);
 }
 
 /* Range Slider */
@@ -1034,11 +1046,12 @@ a:hover {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 800;
-  color: var(--pubg-gold);
-  background: var(--pubg-gold-dim);
-  border: 1px solid var(--pubg-gold);
+  color: var(--tactical-cyan);
+  background: var(--tactical-cyan-dim);
+  border: 1px solid var(--tactical-cyan);
   padding: 3px 8px;
   border-radius: var(--radius-sm);
+  white-space: nowrap;
 }
 
 .slider-input-container {
@@ -1061,20 +1074,20 @@ a:hover {
   appearance: none;
   width: 16px;
   height: 18px;
-  background: var(--pubg-gold);
+  background: var(--tactical-cyan);
   cursor: pointer;
   border-radius: var(--radius-sm);
-  box-shadow: 0 0 6px rgba(242, 169, 0, 0.6);
+  box-shadow: 0 0 8px var(--tactical-cyan-glow);
   border: none;
 }
 
 .tactical-range::-moz-range-thumb {
   width: 16px;
   height: 18px;
-  background: var(--pubg-gold);
+  background: var(--tactical-cyan);
   cursor: pointer;
   border-radius: var(--radius-sm);
-  box-shadow: 0 0 6px rgba(242, 169, 0, 0.6);
+  box-shadow: 0 0 8px var(--tactical-cyan-glow);
   border: none;
 }
 
