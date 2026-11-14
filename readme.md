@@ -93,10 +93,6 @@ Dino executes on an event-driven loop triggered whenever hardware inputs occur:
 ```
 MIT License — Copyright (c) 2026 Dino Team
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files, to deal in the Software
-without restriction, including without limitation the rights to use, copy, modify,
-merge, publish, distribute, sublicense, and/or sell copies of the Software.
 ```
 
 **Disclaimer:** This utility is developed for accessibility testing, private research, and educational purposes. Use responsibly in compliance with relevant platform terms.
