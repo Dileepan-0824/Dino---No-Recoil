@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUBG-NO-RECOIL-SCRIPTS | Dino</title>
+  <meta name="description" content="Precision recoil compensation scripts for PUBG PC. Compatible with Logitech G Series Gaming Mice. Local hardware Lua macro execution.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Tactical HUD Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <span class="brand-badge">LOGITECH G</span>
+        <span class="brand-title">PUBG-NO-RECOIL-SCRIPTS</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#comparison">Recoil Test</a>
+        <a href="#settings">Settings</a>
+        <a href="#keybindings">Keybindings</a>
+        <a href="#setup">Setup Guide</a>
+        <a href="#code-preview">Source</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="Dino.lua" download="Dino.lua" class="btn btn-pubg btn-sm">
+          <svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          DOWNLOAD DINO
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Tactical Hero Section -->
+    <section id="overview" class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-badge">
+          <span class="hud-marker">[</span>
+          <span class="pulse-indicator"></span>
+          <span>DINO RECOIL SYSTEM</span>
+          <span class="hud-marker">]</span>
+        </div>
+        <h1 class="hero-title">PRECISION RECOIL COMPENSATION FOR PUBG PC</h1>
+        <p class="hero-subtitle">
+          Calibrated mathematical recoil compensation designed specifically for PUBG PC weapons. Runs natively inside Logitech G HUB and Logitech Gaming Software as a pure local hardware Lua macro.
+        </p>
+
+        <!-- Tactical Telemetry HUD -->
+        <div class="hero-meta">
+          <div class="meta-tag">
+            <span class="meta-label">SYSTEM TYPE</span>
+            <span class="meta-value">LOGITECH LUA</span>
+          </div>
+          <div class="meta-tag">
+            <span class="meta-label">MOUSE DPI</span>
+            <span class="meta-value">800 DPI</span>
+          </div>
+          <div class="meta-tag">
+            <span class="meta-label">WINDOWS POINTER</span>
+            <span class="meta-value">6-11</span>
+          </div>
+          <div class="meta-tag">
+            <span class="meta-label">IN-GAME SENS</span>
+            <span class="meta-value">50 (1.00 RATIO)</span>
+          </div>
+        </div>
+
+        <!-- Action Callouts -->
+        <div class="hero-cta-group">
+          <a href="Dino.lua" download="Dino.lua" class="btn btn-pubg btn-lg">
+            <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            DOWNLOAD DINO.LUA
+          </a>
+          <button id="copyScriptBtn" class="btn btn-tactical btn-lg" type="button">
+            <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span id="copyBtnText">COPY LUA SCRIPT</span>
+          </button>
+          <a href="https://github.com/Dileepan-0824/PUBG-NO-RECOIL" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
+            <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            GITHUB REPOSITORY
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Highlights Section -->
+    <section class="features-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ SYSTEM CAPABILITIES ]</span>
+          <h2 class="section-title">CALIBRATED COMBAT STABILITY</h2>
+          <p class="section-desc">Zero memory inspection, zero third-party software. 100% executed locally within the Logitech driver Lua environment.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-header">
+              <span class="feature-number">01</span>
+              <h3>Adaptive Recoil Curves</h3>
+            </div>
+            <p>Mathematical curve interpolation calculates continuous vertical pull rates, preventing sudden jumps, erratic snaps, or robotic stepped movement.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <span class="feature-number">02</span>
+              <h3>Dynamic Stance Scaling</h3>
+            </div>
+            <p>Integrated crouch and prone compensation ratios (0.84 to 0.88 AR ratio, 0.56 LMG ratio) dynamically adjust recoil compensation on player stance shift.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <span class="feature-number">03</span>
+              <h3>Attachment Damping</h3>
+            </div>
+            <p>Attachment dampening coefficients automatically scale for compensators, foregrips, and tactical stocks via NumLock toggle or persistent mode.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-header">
+              <span class="feature-number">04</span>
+              <h3>DMR Auto-Tap Cadence</h3>
+            </div>
+            <p>Sub-millisecond frame-safe rapid single-tap cycling for Dragunov, SLR, SKS, Mini-14, and Mk12 with per-shot progressive recoil control.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recoil Pattern Visual Comparison -->
+    <section id="comparison" class="comparison-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ RECOIL PATTERN ANALYSIS ]</span>
+          <h2 class="section-title">WEAPON SPRAY COMPARISON</h2>
+          <p class="section-desc">Direct target test showing raw unassisted weapon climb versus Dino stabilized trajectory.</p>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="comparison-card">
+            <div class="comparison-badge badge-warning">RAW UNASSISTED RECOIL (BEFORE)</div>
+            <div class="image-wrapper">
+              <img src="img/before.png" alt="PUBG raw recoil pattern unassisted" loading="lazy">
+            </div>
+            <div class="comparison-info">
+              <h4>Unassisted Weapon Climb</h4>
+              <ul>
+                <li>Severe vertical climb pushing crosshairs off target</li>
+                <li>Wide erratic horizontal dispersion and spread</li>
+                <li>Very low hit reliability after initial 5 shots</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="comparison-card">
+            <div class="comparison-badge badge-pubg">DINO COMPENSATED (AFTER)</div>
+            <div class="image-wrapper">
+              <img src="img/after.png" alt="PUBG compensated recoil pattern with Dino" loading="lazy">
+            </div>
+            <div class="comparison-info">
+              <h4>Dino Stabilized Pattern</h4>
+              <ul>
+                <li>Controlled grouping locked tightly on center mass</li>
+                <li>Counter-drift compensation minimizing horizontal drift</li>
+                <li>Predictable bullet placement across sustained fire</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings Matrix Section -->
+    <section id="settings" class="settings-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ CALIBRATION MATRIX ]</span>
+          <h2 class="section-title">CALIBRATED SYSTEM SETTINGS</h2>
+          <p class="section-desc">Script parameters are calibrated to this exact baseline configuration for 1:1 precision.</p>
+        </div>
+
+        <!-- 3 Hardware Baseline Cards -->
+        <div class="baseline-grid">
+          <div class="baseline-card">
+            <div class="baseline-label">MOUSE DPI</div>
+            <div class="baseline-value">800</div>
+            <div class="baseline-sub">Hardware Sensor Standard</div>
+          </div>
+          <div class="baseline-card">
+            <div class="baseline-label">WINDOWS POINTER SPEED</div>
+            <div class="baseline-value">6-11</div>
+            <div class="baseline-sub">1:1 Raw Scaling (No Gain)</div>
+          </div>
+          <div class="baseline-card">
+            <div class="baseline-label">ENHANCE POINTER PRECISION</div>
+            <div class="baseline-value">DISABLED</div>
+            <div class="baseline-sub">Mouse Acceleration OFF</div>
+          </div>
+        </div>
+
+        <!-- In-game Settings Panel -->
+        <div class="settings-detail-card">
+          <div class="settings-detail-grid">
+            <div class="settings-image-col">
+              <div class="settings-img-container">
+                <img src="img/Gamesettings.jpeg" alt="In-game sensitivity calibration reference" loading="lazy">
+              </div>
+              <span class="img-caption">PUBG PC In-Game Sensitivity Reference</span>
+            </div>
+
+            <div class="settings-table-col">
+              <h3>In-Game Sensitivity Configuration</h3>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Calibrated Value</th>
+                    <th>Function</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Invert Mouse</td>
+                    <td><span class="badge-pill">Disable</span></td>
+                    <td>Standard Y-axis direction</td>
+                  </tr>
+                  <tr>
+                    <td>General Sensitivity</td>
+                    <td><span class="badge-pill">50</span></td>
+                    <td>Base turn rate</td>
+                  </tr>
+                  <tr>
+                    <td>Vehicle Sensitivity</td>
+                    <td><span class="badge-pill">50</span></td>
+                    <td>Vehicle control rate</td>
+                  </tr>
+                  <tr>
+                    <td>Aim Sensitivity</td>
+                    <td><span class="badge-pill">50</span></td>
+                    <td>Hipfire aim transition</td>
+                  </tr>
+                  <tr>
+                    <td>ADS Sensitivity</td>
+                    <td><span class="badge-pill">50</span></td>
+                    <td>Base aiming down sights rate</td>
+                  </tr>
+                  <tr>
+                    <td>Universal Scope Sensitivity</td>
+                    <td><span class="badge-pill">Enable (50)</span></td>
+                    <td>Uniform 1x to 15x scope multiplier</td>
+                  </tr>
+                  <tr>
+                    <td>Vertical Sensitivity Multiplier</td>
+                    <td><span class="badge-pill">1.00</span></td>
+                    <td>1:1 vertical to horizontal tracking</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keybindings Reference Section -->
+    <section id="keybindings" class="keybindings-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ ARSENAL KEYBINDINGS ]</span>
+          <h2 class="section-title">WEAPON PROFILE BINDINGS</h2>
+          <p class="section-desc">Instantly toggle weapon profiles using mouse side buttons and Logitech G-Keys.</p>
+        </div>
+
+        <!-- Tab Selectors -->
+        <div class="tabs-nav">
+          <button class="tab-btn active" data-tab="tab-556">5.56mm Series (Mouse 4)</button>
+          <button class="tab-btn" data-tab="tab-762">7.62mm Series (Mouse 5)</button>
+          <button class="tab-btn" data-tab="tab-smg">SMG Series (Mouse 6)</button>
+          <button class="tab-btn" data-tab="tab-gkeys">Keyboard G-Keys (G1-G12)</button>
+        </div>
+
+        <div class="tabs-content">
+          <!-- 5.56mm Tab -->
+          <div id="tab-556" class="tab-pane active">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Weapon</th>
+                  <th>Caliber</th>
+                  <th>Modifier Key</th>
+                  <th>Mouse Trigger</th>
+                  <th>Archetype</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>M416</td><td>5.56mm</td><td>None</td><td>Mouse 4</td><td>Assault Rifle</td></tr>
+                <tr><td>AUG</td><td>5.56mm</td><td>Left Ctrl</td><td>Mouse 4</td><td>Assault Rifle</td></tr>
+                <tr><td>SCAR-L</td><td>5.56mm</td><td>Left Alt</td><td>Mouse 4</td><td>Assault Rifle</td></tr>
+                <tr><td>G36C</td><td>5.56mm</td><td>Right Ctrl</td><td>Mouse 4</td><td>Assault Rifle</td></tr>
+                <tr><td>QBZ</td><td>5.56mm</td><td>Right Alt</td><td>Mouse 4</td><td>Assault Rifle</td></tr>
+                <tr><td>FAMAS</td><td>5.56mm</td><td>Right Shift</td><td>Mouse 4</td><td>Assault Rifle</td></tr>
+                <tr><td>Mk12</td><td>5.56mm</td><td>Left Ctrl + Left Shift</td><td>Mouse 4</td><td>DMR (Auto-Tap)</td></tr>
+                <tr><td>Mini-14</td><td>5.56mm</td><td>Left Alt + Left Shift</td><td>Mouse 4</td><td>DMR (Auto-Tap)</td></tr>
+                <tr><td>M16A4</td><td>5.56mm</td><td>Right Ctrl + Right Alt</td><td>Mouse 4</td><td>Burst Rifle</td></tr>
+                <tr><td>M249</td><td>5.56mm</td><td>Right Alt + Right Shift</td><td>Mouse 4</td><td>Light Machine Gun</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 7.62mm Tab -->
+          <div id="tab-762" class="tab-pane">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Weapon</th>
+                  <th>Caliber</th>
+                  <th>Modifier Key</th>
+                  <th>Mouse Trigger</th>
+                  <th>Archetype</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Beryl M762</td><td>7.62mm</td><td>None</td><td>Mouse 5</td><td>Assault Rifle</td></tr>
+                <tr><td>AKM</td><td>7.62mm</td><td>Left Ctrl</td><td>Mouse 5</td><td>Assault Rifle</td></tr>
+                <tr><td>Groza</td><td>7.62mm</td><td>Left Alt</td><td>Mouse 5</td><td>Assault Rifle</td></tr>
+                <tr><td>K2</td><td>5.56mm</td><td>Right Ctrl</td><td>Mouse 5</td><td>Assault Rifle</td></tr>
+                <tr><td>ACE32</td><td>7.62mm</td><td>Right Alt</td><td>Mouse 5</td><td>Assault Rifle</td></tr>
+                <tr><td>MG3</td><td>7.62mm</td><td>Right Shift</td><td>Mouse 5</td><td>Light Machine Gun</td></tr>
+                <tr><td>SKS</td><td>7.62mm</td><td>Left Ctrl + Left Alt + Left Shift</td><td>Mouse 5</td><td>DMR (Auto-Tap)</td></tr>
+                <tr><td>SLR</td><td>7.62mm</td><td>Left Ctrl + Left Shift</td><td>Mouse 5</td><td>DMR (Auto-Tap)</td></tr>
+                <tr><td>Dragunov</td><td>7.62mm</td><td>Left Alt + Left Shift</td><td>Mouse 5</td><td>DMR (Auto-Tap)</td></tr>
+                <tr><td>Mk14</td><td>7.62mm</td><td>Right Ctrl + Right Alt</td><td>Mouse 5</td><td>DMR / Full Auto</td></tr>
+                <tr><td>Mutant</td><td>7.62mm</td><td>Right Alt + Right Shift</td><td>Mouse 5</td><td>Burst Rifle</td></tr>
+                <tr><td>RPD</td><td>7.62mm</td><td>Right Ctrl + Right Shift</td><td>Mouse 5</td><td>Light Machine Gun</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SMG Tab -->
+          <div id="tab-smg" class="tab-pane">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Weapon</th>
+                  <th>Caliber</th>
+                  <th>Modifier Key</th>
+                  <th>Mouse Trigger</th>
+                  <th>Archetype</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>MP5K</td><td>9mm</td><td>None</td><td>Mouse 6</td><td>Submachine Gun</td></tr>
+                <tr><td>Vector</td><td>9mm</td><td>Left Ctrl</td><td>Mouse 6</td><td>Submachine Gun</td></tr>
+                <tr><td>UMP45</td><td>9mm</td><td>Left Alt</td><td>Mouse 6</td><td>Submachine Gun</td></tr>
+                <tr><td>JS9</td><td>9mm</td><td>Right Ctrl</td><td>Mouse 6</td><td>Submachine Gun</td></tr>
+                <tr><td>Uzi</td><td>9mm</td><td>Right Alt</td><td>Mouse 6</td><td>Submachine Gun</td></tr>
+                <tr><td>MP9</td><td>9mm</td><td>Right Shift</td><td>Mouse 6</td><td>Submachine Gun</td></tr>
+                <tr><td>VSS</td><td>9mm</td><td>Left Ctrl + Left Shift</td><td>Mouse 6</td><td>DMR (Full Auto)</td></tr>
+                <tr><td>Tommy Gun</td><td>.45 ACP</td><td>Left Alt + Left Shift</td><td>Mouse 6</td><td>Submachine Gun</td></tr>
+                <tr><td>P90</td><td>5.7mm</td><td>Right Ctrl + Right Alt</td><td>Mouse 6</td><td>Submachine Gun</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- G-Keys Tab -->
+          <div id="tab-gkeys" class="tab-pane">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>G-Key</th>
+                  <th>Mapped Profile</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>G1</td><td>M416</td><td>Selects M416 Profile</td></tr>
+                <tr><td>G2</td><td>Beryl M762</td><td>Selects Beryl Profile</td></tr>
+                <tr><td>G3</td><td>Mini-14</td><td>Selects Mini-14 DMR Auto-Tap</td></tr>
+                <tr><td>G4</td><td>SLR</td><td>Selects SLR DMR Auto-Tap</td></tr>
+                <tr><td>G5</td><td>AUG</td><td>Selects AUG Profile</td></tr>
+                <tr><td>G6</td><td>AKM</td><td>Selects AKM Profile</td></tr>
+                <tr><td>G7</td><td>SKS</td><td>Selects SKS DMR Auto-Tap</td></tr>
+                <tr><td>G8</td><td>Dragunov</td><td>Selects Dragunov DMR Auto-Tap</td></tr>
+                <tr><td>G9</td><td>MP5K</td><td>Selects MP5K SMG Profile</td></tr>
+                <tr><td>G10</td><td>Vector</td><td>Selects Vector SMG Profile</td></tr>
+                <tr><td>G11</td><td>M249</td><td>Selects M249 LMG Profile</td></tr>
+                <tr><td>G12</td><td>Standby</td><td>Disables recoil pull / Standby</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Setup Guide Section -->
+    <section id="setup" class="setup-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ DEPLOYMENT ]</span>
+          <h2 class="section-title">QUICK SETUP GUIDE</h2>
+          <p class="section-desc">Deploy in three simple steps using official Logitech mouse management software.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">01 / SETUP</div>
+            <h3>Open Logitech G HUB</h3>
+            <p>Select your mouse in Logitech G HUB or LGS. Navigate to the profile for PUBG and click on <strong>Scripting</strong>.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">02 / IMPORT</div>
+            <h3>Import Dino Script</h3>
+            <p>Open the Lua editor window. Clear any old script lines and paste the complete content of <strong>Dino.lua</strong> directly into the editor.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">03 / LOCK</div>
+            <h3>Save & Lock Profile</h3>
+            <p>Press <strong>Ctrl + S</strong> to save. Ensure profile persistent locking is active or assigned to the PUBG executable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Header Section -->
+    <section id="code-preview" class="preview-section">
+      <div class="container">
+        <div class="preview-header">
+          <div>
+            <span class="section-tag">[ SCRIPT SOURCE ]</span>
+            <h2>Dino Header & Config</h2>
+          </div>
+          <div class="preview-actions">
+            <a href="Dino.lua" download="Dino.lua" class="btn btn-pubg btn-sm">DOWNLOAD DINO.LUA</a>
+          </div>
+        </div>
+
+        <div class="code-box">
+          <pre><code>-- DINO - RECOIL COMPENSATION SYSTEM FOR PUBG PC (LOGITECH G HUB)
+-- HARDWARE BASELINE: 800 DPI | SensSetting = 1.00 (In-Game Sens: 50) | Win Pointer: 6-11
+
+local MOUSE_DPI = 800
+local SensSetting = 1.00
+
+-- Recovery-Damping Exponent
+local SplineResponseGamma = 0.32
+
+-- Feature Toggles
+local EnableCrouchMode  = true
+local EnableProneMode   = false
+local EnableHoldBreath  = true
+local EnableAttachments = true
+local AttachmentsMode   = "NUMLOCK"      -- "NUMLOCK" or "ALWAYS"
+
+-- Operation Modes
+local ClickMode          = 1             -- 1 = LMB only, 3 = RMB + LMB
+local DMR_AUTO_TAP       = true          -- Rapid single-tap cycling on DMRs
+local HorizontalStrength = 0.60          -- Master horizontal bias multiplier
+
+-- State Management
+local WEAPON_TOGGLE_MODE        = "ANY"
+local SYNC_CAPSLOCK_LED         = true
+local REQUIRE_CAPSLOCK_FOR_FIRE = false
+local ENABLE_LOGGING            = true</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Tactical Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-info">
+        <span class="footer-brand">PUBG-NO-RECOIL-SCRIPTS</span>
+        <p class="footer-note">Client-side hardware Lua macro for Logitech gaming mice. 100% local driver execution.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Dileepan-0824/PUBG-NO-RECOIL" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+        <a href="Dino.lua" download="Dino.lua">Direct Download</a>
+        <a href="#overview">Back to Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Script copied to clipboard.</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
