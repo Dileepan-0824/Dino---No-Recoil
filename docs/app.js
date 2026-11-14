@@ -25,6 +25,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Source Code Toggle Logic
+  const toggleCodeBtn = document.getElementById('toggleCodeBtn');
+  const toggleCodeText = document.getElementById('toggleCodeText');
+  const toggleCodeIcon = document.getElementById('toggleCodeIcon');
+  const codeBoxContainer = document.getElementById('codeBoxContainer');
+
+  if (toggleCodeBtn && codeBoxContainer) {
+    toggleCodeBtn.addEventListener('click', function () {
+      const isCollapsed = codeBoxContainer.classList.contains('collapsed');
+      if (isCollapsed) {
+        codeBoxContainer.classList.remove('collapsed');
+        if (toggleCodeText) toggleCodeText.textContent = 'COLLAPSE CODE PREVIEW';
+        if (toggleCodeIcon) toggleCodeIcon.textContent = '[-]';
+        toggleCodeBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        codeBoxContainer.classList.add('collapsed');
+        if (toggleCodeText) toggleCodeText.textContent = 'EXPAND CODE PREVIEW';
+        if (toggleCodeIcon) toggleCodeIcon.textContent = '[+]';
+        toggleCodeBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // Copy Lua Script to Clipboard
   const copyBtn = document.getElementById('copyScriptBtn');
   const copyBtnText = document.getElementById('copyBtnText');

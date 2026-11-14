@@ -158,6 +158,13 @@ a:hover {
 .nav-actions {
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+.nav-github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 /* Tactical Buttons */
@@ -463,7 +470,7 @@ a:hover {
   overflow: hidden;
   border: 1px solid var(--border-tactical);
   margin-bottom: 20px;
-  aspect-ratio: 16 / 10;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -471,8 +478,7 @@ a:hover {
 
 .image-wrapper img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 
@@ -729,21 +735,59 @@ a:hover {
   color: #ffffff;
 }
 
-/* Code Preview */
+/* Code Preview Card & Toggle */
 .preview-section {
   padding: 80px 0;
   border-bottom: 2px solid var(--border-tactical);
 }
 
+.preview-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-tactical);
+  border-top: 3px solid var(--pubg-gold);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+}
+
 .preview-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .preview-header h2 {
   font-size: 22px;
+}
+
+.preview-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.toggle-icon {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  color: var(--pubg-gold);
+  margin-right: 4px;
+}
+
+.code-box-wrapper {
+  max-height: 1200px;
+  overflow: hidden;
+  opacity: 1;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, margin-top 0.25s ease;
+  margin-top: 20px;
+}
+
+.code-box-wrapper.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  pointer-events: none;
 }
 
 .code-box {
@@ -792,6 +836,14 @@ a:hover {
 .footer-links {
   display: flex;
   gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .footer-links a {
