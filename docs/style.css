@@ -21,6 +21,11 @@
   --pubg-gold-dim: rgba(242, 169, 0, 0.15);
   --pubg-gold-glow: rgba(242, 169, 0, 0.35);
   
+  /* Tactical Cyan Green */
+  --tactical-cyan: #00f5a0;
+  --tactical-cyan-dim: rgba(0, 245, 160, 0.15);
+  --tactical-cyan-glow: rgba(0, 245, 160, 0.5);
+  
   --accent-red: #e53e3e;
   --accent-green: #10b981;
   
@@ -592,11 +597,10 @@ a:hover {
   padding: 30px;
 }
 
-.settings-detail-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 36px;
-  align-items: center;
+.settings-img-showcase {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .settings-img-container {
@@ -604,6 +608,7 @@ a:hover {
   overflow: hidden;
   border: 1px solid var(--border-tactical);
   background: #000000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .settings-img-container img {
@@ -617,14 +622,9 @@ a:hover {
   font-size: 12px;
   color: var(--text-dim);
   text-align: center;
-  margin-top: 10px;
+  margin-top: 14px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-}
-
-.settings-table-col h3 {
-  font-size: 19px;
-  margin-bottom: 16px;
 }
 
 /* Tables */
@@ -817,8 +817,9 @@ a:hover {
 }
 
 .view-toggle-btn.active {
-  background: var(--pubg-gold);
+  background: var(--tactical-cyan);
   color: #000000;
+  box-shadow: 0 0 14px var(--tactical-cyan-glow);
 }
 
 .config-actions-top {
@@ -959,14 +960,14 @@ a:hover {
 }
 
 .tactical-switch input:checked + .switch-track {
-  background-color: var(--pubg-gold-dim);
-  border-color: var(--pubg-gold);
+  background-color: var(--tactical-cyan-dim);
+  border-color: var(--tactical-cyan);
 }
 
 .tactical-switch input:checked + .switch-track::after {
   transform: translateX(22px);
-  background-color: var(--pubg-gold);
-  box-shadow: 0 0 8px rgba(242, 169, 0, 0.7);
+  background-color: var(--tactical-cyan);
+  box-shadow: 0 0 10px var(--tactical-cyan-glow);
 }
 
 .switch-status {
@@ -978,7 +979,7 @@ a:hover {
 }
 
 .tactical-switch input:checked ~ .switch-status {
-  color: var(--pubg-gold);
+  color: var(--tactical-cyan);
 }
 
 /* Segmented Control */
