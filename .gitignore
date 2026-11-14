@@ -9,3 +9,7 @@ desktop.ini
 
 # Archives
 *.zip
+
+# Local Data Dumps & Scratch
+pubgintel_dump/
+scratch/

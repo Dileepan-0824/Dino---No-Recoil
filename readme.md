@@ -7,7 +7,7 @@
 ### Enterprise-Grade Lua Weapon Recoil & Ballistics Engine for PUBG: BATTLEGROUNDS
 *Engineered for competitive PC gameplay. Sub-pixel precision. Zero memory injection. Completely undetectable.*
 
-[![Latest Version](https://img.shields.io/badge/Release-v8.0-00C853?style=for-the-badge&logo=github)](#version-history)
+[![Latest Version](https://img.shields.io/badge/Release-v10.0-00C853?style=for-the-badge&logo=github)](#version-history)
 [![Engine](https://img.shields.io/badge/Platform-Logitech%20G%20Hub%20Lua-00A8FF?style=for-the-badge&logo=logitech)](#requirements)
 [![Game](https://img.shields.io/badge/PUBG-PC%20(v42+)-FF6F00?style=for-the-badge&logo=target)](#recommended-game-settings)
 [![DPI Calibrated](https://img.shields.io/badge/DPI-400%20%7C%20800%20Native-9C27B0?style=for-the-badge)](#in-game-sensitivity-reference-matrix)
@@ -120,7 +120,7 @@ Pressing **Mouse Button 3 (Middle Click)** instantly deactivates the macro and s
 2. Select your **PUBG Profile** from the profile carousel.
 3. Click the **Scripting** tab (bottom-left brackets icon `</>`).
 4. Select **Create a New Lua Script** (or replace your active script).
-5. Copy and paste the entire contents of [`Dino-V8.lua`](Dino-V8.lua).
+5. Copy and paste the entire contents of [`Dino-V10.lua`](Dino-V10.lua).
 6. Click **Script -> Save** (`Ctrl+S`).
 
 ### Step 2: PUBG In-Game Settings Configuration
@@ -135,7 +135,7 @@ To ensure flawless 1:1 hardware tracking and laser precision, configure these se
 
 <div align="center">
 
-![Game Settings Reference](img/Game-Settings.png)
+![Game Settings Reference](img/Gamesettings.jpeg)
 
 </div>
 
@@ -333,15 +333,18 @@ The script will permanently apply the optimized attachment damping profile (-22%
 
 | Version | File | Key Engineering Milestones |
 | :---: | :--- | :--- |
-| **V8.0** | [`Dino-V8.lua`](Dino-V8.lua) | **Latest Release**: Complete 32-weapon overhaul, compound modifiers (+100 to +1200), dedicated PUBGIntel DMR engine, burst mode, laser S-curve, transparent micro H-bias, 8-tick headshot lock, direct middle-click standby, user-tuned baseline (`800 DPI`, `Sens 1.20`), zero-allocation architecture. |
-| **V7.0** | [`Dino-V7.lua`](Dino-V7.lua) | Added RPD 7.62mm LMG, 65% keyboard NumLock swap, excised vaulted DP-28 & Bizon. |
-| **V6.0** | [`Dino-V6.lua`](Dino-V6.lua) | DMR single-tap mode, initial WeaponTuner table, MP9 integration. |
-| **V5.0** | [`Dino-V5.lua`](Dino-V5.lua) | Elapsed-time tick compensation, horizontal tracking accumulators. |
-| **V4.0** | [`Dino-V4.lua`](Dino-V4.lua) | Spray transfer target detection (soft reset on target flick mid-spray). |
-| **V3.0** | [`Dino-V3.lua`](Dino-V3.lua) | Burst memory (380ms re-fire resume). |
-| **V2.0** | `DIno-V2.lua` | Progressive linear decay shaper, first-bullet kick mitigation. |
-| **V1.0** | `Dino-V1.lua` | Modifier keybind system introduction, horizontal dampening. |
+| **V10.0** | [`Dino-V10.lua`](Dino-V10.lua) | **Active Release**: UE4 Cubic Hermite Spline Ballistic Engine calibrated from extracted game files (`pubgintel.com`). Native full-auto continuous hold for VSS & Mk14, complete attachment curve scaling, and zero-allocation runtime. |
+| **V9.0** | `Dino-V9.lua` *(legacy)* | Ballistic engine overhaul, continuous recoil hold, full-auto VSS/Mk14, horizontal bias & startup telemetry. |
+| **V8.0** | `Dino-V8.lua` *(legacy)* | 32-weapon overhaul, compound modifiers (+100 to +1200), dedicated PUBGIntel DMR engine, burst mode, laser S-curve, transparent micro H-bias, 8-tick headshot lock. |
+| **V7.0** | `Dino-V7.lua` *(legacy)* | Added RPD 7.62mm LMG, 65% keyboard NumLock swap, excised vaulted DP-28 & Bizon. |
+| **V6.0** | `Dino-V6.lua` *(legacy)* | DMR single-tap mode, initial WeaponTuner table, MP9 integration. |
+| **V5.0** | `Dino-V5.lua` *(legacy)* | Elapsed-time tick compensation, horizontal tracking accumulators. |
+| **V4.0** | `Dino-V4.lua` *(legacy)* | Spray transfer target detection (soft reset on target flick mid-spray). |
+| **V3.0** | `Dino-V3.lua` *(legacy)* | Burst memory (380ms re-fire resume). |
+| **V2.0** | `DIno-V2.lua` *(legacy)* | Progressive linear decay shaper, first-bullet kick mitigation. |
+| **V1.0** | `Dino-V1.lua` *(legacy)* | Modifier keybind system introduction, horizontal dampening. |
 
+> **Legacy Access:** Prior versions (V1.0 through V9.2) are preserved on the [`legacy`](https://github.com/Dileepan-0824/Dino---No-Recoil/tree/legacy) branch. Switch anytime with `git checkout legacy`.
 > Complete technical details and commit diffs are available in [changelog.md](changelog.md).
 
 ---
@@ -364,6 +367,6 @@ merge, publish, distribute, sublicense, and/or sell copies of the Software.
 ---
 
 **Crafted with precision for competitive PUBG players worldwide.**  
-<sub>Dino Engine • Version 8.0 • November 2026</sub>
+<sub>Dino Engine • Version 10.0 • November 2026</sub>
 
 </div>
