@@ -15,16 +15,15 @@
   --border-tactical: #2b313d;
   --border-light: #3d4454;
   
-  /* PUBG Signature Gold / Amber */
-  --pubg-gold: #f2a900;
-  --pubg-gold-hover: #ffbe1a;
-  --pubg-gold-dim: rgba(242, 169, 0, 0.15);
-  --pubg-gold-glow: rgba(242, 169, 0, 0.35);
+  /* Tactical Cyan Green Accent Theme */
+  --pubg-gold: #00f5a0;
+  --pubg-gold-hover: #1affb2;
+  --pubg-gold-dim: rgba(0, 245, 160, 0.15);
+  --pubg-gold-glow: rgba(0, 245, 160, 0.4);
   
-  /* Tactical Cyan Green */
   --tactical-cyan: #00f5a0;
   --tactical-cyan-dim: rgba(0, 245, 160, 0.15);
-  --tactical-cyan-glow: rgba(0, 245, 160, 0.5);
+  --tactical-cyan-glow: rgba(0, 245, 160, 0.4);
   
   --accent-red: #e53e3e;
   --accent-green: #10b981;
@@ -61,7 +60,7 @@ body {
   display: flex;
   flex-direction: column;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(242, 169, 0, 0.08) 0%, transparent 55%),
+    radial-gradient(circle at 50% 0%, rgba(0, 245, 160, 0.08) 0%, transparent 55%),
     linear-gradient(to bottom, #0c0e12 0%, #101319 100%);
   background-attachment: fixed;
 }
@@ -218,7 +217,7 @@ a:hover {
   background: var(--pubg-gold-hover);
   border-color: var(--pubg-gold-hover);
   color: #000000;
-  box-shadow: 0 6px 20px rgba(242, 169, 0, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 245, 160, 0.5);
   transform: translateY(-1px);
 }
 
@@ -654,7 +653,7 @@ a:hover {
 }
 
 .data-table tr:hover td {
-  background: rgba(242, 169, 0, 0.04);
+  background: rgba(0, 245, 160, 0.04);
   color: #ffffff;
 }
 
@@ -663,7 +662,7 @@ a:hover {
   padding: 2px 8px;
   background: var(--pubg-gold-dim);
   color: var(--pubg-gold);
-  border: 1px solid rgba(242, 169, 0, 0.3);
+  border: 1px solid rgba(0, 245, 160, 0.3);
   border-radius: var(--radius-sm);
   font-weight: 700;
   font-size: 12px;
@@ -871,7 +870,7 @@ a:hover {
   color: var(--pubg-gold);
   background: var(--pubg-gold-dim);
   padding: 4px 8px;
-  border: 1px solid rgba(242, 169, 0, 0.4);
+  border: 1px solid rgba(0, 245, 160, 0.4);
   border-radius: var(--radius-sm);
 }
 
@@ -917,12 +916,15 @@ a:hover {
 }
 
 .toggle-title {
+  display: block;
   font-size: 13px;
   font-weight: 700;
   color: #ffffff;
+  margin-bottom: 2px;
 }
 
 .toggle-desc {
+  display: block;
   font-size: 11px;
   color: var(--text-dim);
   line-height: 1.4;
@@ -1032,14 +1034,15 @@ a:hover {
 .slider-row {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   padding: 6px 0;
 }
 
 .slider-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 14px;
 }
 
 .slider-value-badge {
@@ -1052,6 +1055,7 @@ a:hover {
   padding: 3px 8px;
   border-radius: var(--radius-sm);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .slider-input-container {
