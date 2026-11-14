@@ -1,7 +1,7 @@
 /* ==========================================================================
-   PUBG-NO-RECOIL-SCRIPTS
+   PUBG-NO-RECOIL-SCRIPTS STYLESHEET
    Theme: PUBG PC Tactical Survival Amber & Charcoal Black
-   Zero Emojis - Industrial Military Aesthetics
+   Zero Emojis - Pixel-Perfect HUD Alignment - Interactive Configurator
    ========================================================================== */
 
 :root {
@@ -64,7 +64,7 @@ body {
 /* Container */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -91,53 +91,61 @@ a:hover {
   color: var(--pubg-gold-hover);
 }
 
-/* Navigation Bar */
+/* ==========================================================================
+   NAVIGATION BAR (PIXEL-PERFECT ALIGNMENT, NO WRAPPING)
+   ========================================================================== */
+
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(12, 14, 18, 0.94);
-  backdrop-filter: blur(10px);
+  background: rgba(12, 14, 18, 0.96);
+  backdrop-filter: blur(12px);
   border-bottom: 2px solid var(--border-tactical);
+  width: 100%;
 }
 
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 68px;
-  max-width: 1200px;
+  height: 70px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 24px;
+  gap: 16px;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.brand-badge {
-  background: var(--pubg-gold);
-  color: #000000;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  padding: 4px 8px;
-  border-radius: var(--radius-sm);
-  text-transform: uppercase;
+.brand-logo-img {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .brand-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
   letter-spacing: 0.06em;
   color: #ffffff;
+  white-space: nowrap;
 }
 
 .nav-links {
   display: flex;
-  gap: 24px;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 1;
+  white-space: nowrap;
 }
 
 .nav-links a {
@@ -148,6 +156,7 @@ a:hover {
   text-transform: uppercase;
   padding: 6px 0;
   border-bottom: 2px solid transparent;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -159,12 +168,8 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.nav-github-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* Tactical Buttons */
@@ -173,30 +178,30 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 10px 20px;
+  padding: 9px 18px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   border: 1px solid transparent;
   transition: var(--transition);
   text-decoration: none;
   user-select: none;
+  white-space: nowrap;
 }
 
 .btn-sm {
-  padding: 7px 14px;
+  padding: 8px 14px;
   font-size: 12px;
 }
 
 .btn-lg {
   padding: 14px 26px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
-/* PUBG Yellow Primary Button */
 .btn-pubg {
   background: var(--pubg-gold);
   color: #000000;
@@ -242,7 +247,20 @@ a:hover {
   flex-shrink: 0;
 }
 
-/* Hero Section */
+.github-icon {
+  flex-shrink: 0;
+}
+
+.nav-github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+
 .hero-section {
   padding: 88px 0 64px;
   position: relative;
@@ -269,6 +287,7 @@ a:hover {
   color: var(--pubg-gold);
   letter-spacing: 0.1em;
   margin-bottom: 24px;
+  white-space: nowrap;
 }
 
 .hud-marker {
@@ -318,6 +337,7 @@ a:hover {
   align-items: center;
   gap: 4px;
   min-width: 150px;
+  white-space: nowrap;
 }
 
 .meta-label {
@@ -369,7 +389,10 @@ a:hover {
   font-size: 15px;
 }
 
-/* Features Grid */
+/* ==========================================================================
+   FEATURES GRID
+   ========================================================================== */
+
 .features-section {
   padding: 80px 0;
   border-bottom: 2px solid var(--border-tactical);
@@ -420,7 +443,10 @@ a:hover {
   line-height: 1.6;
 }
 
-/* Comparison Section */
+/* ==========================================================================
+   COMPARISON SECTION (FULL VISIBILITY, NO CROPPING)
+   ========================================================================== */
+
 .comparison-section {
   padding: 80px 0;
   border-bottom: 2px solid var(--border-tactical);
@@ -450,6 +476,7 @@ a:hover {
   border-radius: var(--radius-sm);
   margin-bottom: 16px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .badge-warning {
@@ -510,7 +537,10 @@ a:hover {
   font-family: var(--font-mono);
 }
 
-/* Settings Section */
+/* ==========================================================================
+   SETTINGS SECTION
+   ========================================================================== */
+
 .settings-section {
   padding: 80px 0;
   border-bottom: 2px solid var(--border-tactical);
@@ -614,6 +644,7 @@ a:hover {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   border-bottom: 1px solid var(--border-tactical);
+  white-space: nowrap;
 }
 
 .data-table td {
@@ -636,6 +667,7 @@ a:hover {
   border-radius: var(--radius-sm);
   font-weight: 700;
   font-size: 12px;
+  white-space: nowrap;
 }
 
 /* Keybindings Section */
@@ -663,6 +695,7 @@ a:hover {
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition);
+  white-space: nowrap;
 }
 
 .tab-btn:hover {
@@ -735,13 +768,317 @@ a:hover {
   color: #ffffff;
 }
 
-/* Code Preview Card & Toggle */
-.preview-section {
+/* ==========================================================================
+   GRAPHICAL SCRIPT CONFIGURATOR & INTERACTIVE TOGGLES
+   ========================================================================== */
+
+.configurator-section {
   padding: 80px 0;
   border-bottom: 2px solid var(--border-tactical);
 }
 
-.preview-card {
+.config-view-switcher {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.view-toggle-group {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border-tactical);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  gap: 4px;
+}
+
+.view-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.view-toggle-btn:hover {
+  color: #ffffff;
+}
+
+.view-toggle-btn.active {
+  background: var(--pubg-gold);
+  color: #000000;
+}
+
+.config-actions-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.config-panel {
+  display: none;
+}
+
+.config-panel.active {
+  display: block;
+}
+
+/* Config Grid */
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 24px;
+}
+
+.config-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-tactical);
+  border-top: 3px solid var(--pubg-gold);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.config-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-tactical);
+}
+
+.config-card-num {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--pubg-gold);
+  background: var(--pubg-gold-dim);
+  padding: 4px 8px;
+  border: 1px solid rgba(242, 169, 0, 0.4);
+  border-radius: var(--radius-sm);
+}
+
+.config-card-header h3 {
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.config-card-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.toggle-row, .control-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 0;
+}
+
+.toggle-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.toggle-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.toggle-desc {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* Tactical Interactive Toggle Switch */
+.tactical-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.tactical-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.switch-track {
+  width: 46px;
+  height: 24px;
+  background-color: #11141a;
+  border: 1px solid #333b48;
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: var(--transition);
+}
+
+.switch-track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background-color: #64748b;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.tactical-switch input:checked + .switch-track {
+  background-color: var(--pubg-gold-dim);
+  border-color: var(--pubg-gold);
+}
+
+.tactical-switch input:checked + .switch-track::after {
+  transform: translateX(22px);
+  background-color: var(--pubg-gold);
+  box-shadow: 0 0 8px rgba(242, 169, 0, 0.7);
+}
+
+.switch-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-dim);
+  width: 26px;
+}
+
+.tactical-switch input:checked ~ .switch-status {
+  color: var(--pubg-gold);
+}
+
+/* Segmented Control */
+.segmented-control {
+  display: inline-flex;
+  background: #0d1017;
+  border: 1px solid var(--border-tactical);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.seg-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.seg-btn:hover {
+  color: #ffffff;
+}
+
+.seg-btn.active {
+  background: var(--pubg-gold);
+  color: #000000;
+}
+
+/* Range Slider */
+.slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-value-badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--pubg-gold);
+  background: var(--pubg-gold-dim);
+  border: 1px solid var(--pubg-gold);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.slider-input-container {
+  width: 100%;
+}
+
+.tactical-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #11141a;
+  border: 1px solid var(--border-tactical);
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.tactical-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 18px;
+  background: var(--pubg-gold);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 6px rgba(242, 169, 0, 0.6);
+  border: none;
+}
+
+.tactical-range::-moz-range-thumb {
+  width: 16px;
+  height: 18px;
+  background: var(--pubg-gold);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 6px rgba(242, 169, 0, 0.6);
+  border: none;
+}
+
+/* Code Editor Card */
+.code-editor-card {
   background: var(--bg-card);
   border: 1px solid var(--border-tactical);
   border-top: 3px solid var(--pubg-gold);
@@ -749,45 +1086,36 @@ a:hover {
   padding: 24px;
 }
 
-.preview-header {
+.code-editor-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-tactical);
 }
 
-.preview-header h2 {
-  font-size: 22px;
-}
-
-.preview-actions {
+.code-editor-title {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.toggle-icon {
+.terminal-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red { background: #e53e3e; }
+.terminal-dot.yellow { background: #f59e0b; }
+.terminal-dot.green { background: #10b981; }
+
+.code-filename {
   font-family: var(--font-mono);
-  font-weight: 800;
-  color: var(--pubg-gold);
-  margin-right: 4px;
-}
-
-.code-box-wrapper {
-  max-height: 1200px;
-  overflow: hidden;
-  opacity: 1;
-  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, margin-top 0.25s ease;
-  margin-top: 20px;
-}
-
-.code-box-wrapper.collapsed {
-  max-height: 0;
-  opacity: 0;
-  margin-top: 0;
-  pointer-events: none;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 700;
 }
 
 .code-box {
@@ -805,11 +1133,15 @@ a:hover {
   color: #d1d5db;
 }
 
-/* Footer */
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
 .footer {
   margin-top: auto;
   background: #080a0d;
   padding: 40px 0;
+  border-top: 2px solid var(--border-tactical);
 }
 
 .footer-container {
@@ -820,12 +1152,26 @@ a:hover {
   gap: 20px;
 }
 
+.footer-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.footer-logo-img {
+  height: 20px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .footer-brand {
   font-size: 15px;
   font-weight: 800;
   color: #ffffff;
   display: block;
-  margin-bottom: 4px;
+  white-space: nowrap;
 }
 
 .footer-note {
@@ -852,6 +1198,7 @@ a:hover {
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .footer-links a:hover {
@@ -885,18 +1232,35 @@ a:hover {
   transform: translateY(0);
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* ==========================================================================
+   RESPONSIVE DESIGN (ZERO UNWANTED WRAPPING)
+   ========================================================================== */
+
+@media (max-width: 1180px) {
+  .nav-links {
+    gap: 12px;
+  }
+  
+  .nav-links a {
+    font-size: 12px;
+  }
+  
+  .brand-title {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 980px) {
+  .nav-links {
+    display: none;
+  }
+  
   .hero-title {
     font-size: 34px;
   }
   
   .settings-detail-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .nav-links {
-    display: none;
   }
 }
 
@@ -912,6 +1276,10 @@ a:hover {
   
   .hero-cta-group .btn {
     width: 100%;
+  }
+  
+  .config-grid {
+    grid-template-columns: 1fr;
   }
   
   .footer-container {

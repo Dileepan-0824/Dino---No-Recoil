@@ -12,30 +12,32 @@
   <!-- Top Tactical HUD Navigation -->
   <header class="navbar">
     <div class="nav-container">
-      <div class="brand">
-        <span class="brand-badge">LOGITECH G</span>
+      <a href="#overview" class="brand">
+        <img src="img/logitech_logo.png" alt="Logitech G" class="brand-logo-img">
         <span class="brand-title">PUBG-NO-RECOIL-SCRIPTS</span>
-      </div>
+      </a>
+
       <nav class="nav-links">
         <a href="#overview">Overview</a>
         <a href="#comparison">Recoil Test</a>
         <a href="#settings">Settings</a>
         <a href="#keybindings">Keybindings</a>
-        <a href="#setup">Setup Guide</a>
-        <a href="#code-preview">Source</a>
+        <a href="#setup">Setup</a>
+        <a href="#configurator">Configurator</a>
       </nav>
+
       <div class="nav-actions">
         <a href="https://github.com/Dileepan-0824/PUBG-NO-RECOIL" target="_blank" rel="noopener noreferrer" class="btn btn-tactical btn-sm nav-github-btn" title="GitHub Repository">
-          <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <svg class="icon github-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
           </svg>
           <span>GITHUB</span>
         </a>
-        <a href="Dino.lua" download="Dino.lua" class="btn btn-pubg btn-sm">
+        <a href="Dino.lua" download="Dino.lua" class="btn btn-pubg btn-sm nav-download-btn">
           <svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
           </svg>
-          DOWNLOAD DINO
+          <span>DOWNLOAD DINO</span>
         </a>
       </div>
     </div>
@@ -92,7 +94,7 @@
             <span id="copyBtnText">COPY LUA SCRIPT</span>
           </button>
           <a href="https://github.com/Dileepan-0824/PUBG-NO-RECOIL" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
-            <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <svg class="icon github-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
             </svg>
             GITHUB REPOSITORY
@@ -442,55 +444,284 @@
       </div>
     </section>
 
-    <!-- Code Header Section with Interactive Toggle -->
-    <section id="code-preview" class="preview-section">
+    <!-- Interactive Graphical Configurator & Live Source Section -->
+    <section id="configurator" class="configurator-section">
       <div class="container">
-        <div class="preview-card">
-          <div class="preview-header">
-            <div class="preview-title-group">
-              <span class="section-tag">[ SCRIPT SOURCE ]</span>
-              <h2>Dino Header & Config</h2>
-            </div>
-            <div class="preview-actions">
-              <button id="toggleCodeBtn" class="btn btn-tactical btn-sm" type="button" aria-expanded="false">
-                <span id="toggleCodeIcon" class="toggle-icon">[+]</span>
-                <span id="toggleCodeText">EXPAND CODE PREVIEW</span>
-              </button>
-              <a href="Dino.lua" download="Dino.lua" class="btn btn-pubg btn-sm">DOWNLOAD DINO.LUA</a>
-            </div>
+        <div class="section-header">
+          <span class="section-tag">[ TACTICAL CONFIGURATOR ]</span>
+          <h2 class="section-title">GRAPHICAL SCRIPT CONFIGURATOR</h2>
+          <p class="section-desc">Interactive hardware toggles and parameters. Toggle features graphically to customize your configuration in real-time.</p>
+        </div>
+
+        <!-- Master View Switcher (Graphical Controls vs Lua Code) -->
+        <div class="config-view-switcher">
+          <div class="view-toggle-group">
+            <button id="viewGraphicalBtn" class="view-toggle-btn active" type="button">
+              <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+              <span>GRAPHICAL CONTROLS</span>
+            </button>
+            <button id="viewCodeBtn" class="view-toggle-btn" type="button">
+              <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+              <span>LUA SOURCE CODE</span>
+            </button>
           </div>
 
-          <div id="codeBoxContainer" class="code-box-wrapper collapsed">
+          <div class="config-actions-top">
+            <button id="resetDefaultsBtn" class="btn btn-outline btn-sm" type="button" title="Reset all options to recommended default calibration">
+              RESET DEFAULTS
+            </button>
+            <button id="copyCustomScriptBtn" class="btn btn-tactical btn-sm" type="button">
+              <span id="copyCustomBtnText">COPY SCRIPT</span>
+            </button>
+            <a href="Dino.lua" download="Dino.lua" class="btn btn-pubg btn-sm">
+              DOWNLOAD DINO.LUA
+            </a>
+          </div>
+        </div>
+
+        <!-- Panel 1: Graphical Interactive Configurator Grid -->
+        <div id="graphicalPanel" class="config-panel active">
+          <div class="config-grid">
+            
+            <!-- Module 1: Stance & Attachment Toggles -->
+            <div class="config-card">
+              <div class="config-card-header">
+                <span class="config-card-num">01</span>
+                <div>
+                  <h3>FEATURE TOGGLES</h3>
+                  <span class="config-card-sub">Dynamic Stance & Attachment Tracking</span>
+                </div>
+              </div>
+
+              <div class="toggle-list">
+                <!-- Crouch Mode -->
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Crouch Compensation Mode</span>
+                    <span class="toggle-desc">Applies game-engine crouch recoil modifier (0.84 to 0.88 ratio)</span>
+                  </div>
+                  <label class="tactical-switch">
+                    <input type="checkbox" id="cfg_crouch" checked>
+                    <span class="switch-track"></span>
+                    <span class="switch-status">ON</span>
+                  </label>
+                </div>
+
+                <!-- Prone Mode -->
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Prone Compensation Mode</span>
+                    <span class="toggle-desc">LALT / LCTRL prone modifier ratio (0.20 to 0.55)</span>
+                  </div>
+                  <label class="tactical-switch">
+                    <input type="checkbox" id="cfg_prone">
+                    <span class="switch-track"></span>
+                    <span class="switch-status">OFF</span>
+                  </label>
+                </div>
+
+                <!-- Hold Breath -->
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Hold Breath Tracking</span>
+                    <span class="toggle-desc">Dynamic lung breath stabilization during scope hold</span>
+                  </div>
+                  <label class="tactical-switch">
+                    <input type="checkbox" id="cfg_breath" checked>
+                    <span class="switch-track"></span>
+                    <span class="switch-status">ON</span>
+                  </label>
+                </div>
+
+                <!-- Attachments Toggle -->
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Attachment Damping</span>
+                    <span class="toggle-desc">Reduces pull for compensators, foregrips, and tactical stocks</span>
+                  </div>
+                  <label class="tactical-switch">
+                    <input type="checkbox" id="cfg_attachments" checked>
+                    <span class="switch-track"></span>
+                    <span class="switch-status">ON</span>
+                  </label>
+                </div>
+
+                <!-- Attachment Mode Segmented -->
+                <div class="control-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Attachment Activation Mode</span>
+                    <span class="toggle-desc">Control attachment scaling trigger</span>
+                  </div>
+                  <div class="segmented-control" data-for="cfg_att_mode">
+                    <button type="button" class="seg-btn active" data-val="NUMLOCK">NUMLOCK</button>
+                    <button type="button" class="seg-btn" data-val="ALWAYS">ALWAYS</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Module 2: Operation & Rate Tuning -->
+            <div class="config-card">
+              <div class="config-card-header">
+                <span class="config-card-num">02</span>
+                <div>
+                  <h3>OPERATION MODES</h3>
+                  <span class="config-card-sub">Triggers, DMR Cadence & Bias Control</span>
+                </div>
+              </div>
+
+              <div class="toggle-list">
+                <!-- Click Mode -->
+                <div class="control-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Click Activation Trigger</span>
+                    <span class="toggle-desc">1 = LMB Only, 3 = RMB (ADS) + LMB</span>
+                  </div>
+                  <div class="segmented-control" data-for="cfg_click_mode">
+                    <button type="button" class="seg-btn active" data-val="1">LMB ONLY</button>
+                    <button type="button" class="seg-btn" data-val="3">RMB + LMB</button>
+                  </div>
+                </div>
+
+                <!-- DMR Auto Tap -->
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">DMR Frame-Safe Auto-Tap</span>
+                    <span class="toggle-desc">Rapid single-tap cycling for Dragunov, SLR, SKS, Mini-14, Mk12</span>
+                  </div>
+                  <label class="tactical-switch">
+                    <input type="checkbox" id="cfg_dmr" checked>
+                    <span class="switch-track"></span>
+                    <span class="switch-status">ON</span>
+                  </label>
+                </div>
+
+                <!-- Horizontal Bias Slider -->
+                <div class="slider-row">
+                  <div class="slider-header">
+                    <div>
+                      <span class="toggle-title">Horizontal Strength Bias</span>
+                      <span class="toggle-desc">Master horizontal counter-drift bias multiplier</span>
+                    </div>
+                    <span id="sliderValDisplay" class="slider-value-badge">0.60 (60%)</span>
+                  </div>
+                  <div class="slider-input-container">
+                    <input type="range" id="cfg_horizontal" min="0" max="100" value="60" class="tactical-range">
+                  </div>
+                </div>
+
+                <!-- Damping Exponent Segmented -->
+                <div class="control-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Recovery Damping Exponent</span>
+                    <span class="toggle-desc">Dynamic curve response rate</span>
+                  </div>
+                  <div class="segmented-control" data-for="cfg_gamma">
+                    <button type="button" class="seg-btn" data-val="0.25">0.25 FLATTER</button>
+                    <button type="button" class="seg-btn active" data-val="0.32">0.32 BALANCED</button>
+                    <button type="button" class="seg-btn" data-val="0.50">0.50 STEEP</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Module 3: State & Hardware Safety -->
+            <div class="config-card">
+              <div class="config-card-header">
+                <span class="config-card-num">03</span>
+                <div>
+                  <h3>STATE & HARDWARE SAFETY</h3>
+                  <span class="config-card-sub">Keyboard Synchronization & Guardrails</span>
+                </div>
+              </div>
+
+              <div class="toggle-list">
+                <!-- Weapon Toggle Mode -->
+                <div class="control-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Weapon Toggle Mode</span>
+                    <span class="toggle-desc">Pressing another weapon button toggles standby or profile</span>
+                  </div>
+                  <div class="segmented-control" data-for="cfg_toggle_mode">
+                    <button type="button" class="seg-btn active" data-val="ANY">ANY BUTTON</button>
+                    <button type="button" class="seg-btn" data-val="SAME">SAME BUTTON</button>
+                  </div>
+                </div>
+
+                <!-- Sync CapsLock LED -->
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Sync CapsLock Keyboard LED</span>
+                    <span class="toggle-desc">Physical keyboard CapsLock LED reflects active macro status</span>
+                  </div>
+                  <label class="tactical-switch">
+                    <input type="checkbox" id="cfg_caps_led" checked>
+                    <span class="switch-track"></span>
+                    <span class="switch-status">ON</span>
+                  </label>
+                </div>
+
+                <!-- Require CapsLock to Fire -->
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Require CapsLock to Fire</span>
+                    <span class="toggle-desc">Hardware safety: requires physical CapsLock ON to pull recoil</span>
+                  </div>
+                  <label class="tactical-switch">
+                    <input type="checkbox" id="cfg_caps_fire">
+                    <span class="switch-track"></span>
+                    <span class="switch-status">OFF</span>
+                  </label>
+                </div>
+
+                <!-- Logging Toggle -->
+                <div class="toggle-row">
+                  <div class="toggle-info">
+                    <span class="toggle-title">Console Telemetry Logging</span>
+                    <span class="toggle-desc">Print real-time profile data and weapon state to G HUB console</span>
+                  </div>
+                  <label class="tactical-switch">
+                    <input type="checkbox" id="cfg_logging" checked>
+                    <span class="switch-track"></span>
+                    <span class="switch-status">ON</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Panel 2: Live Lua Source Code View -->
+        <div id="codePanel" class="config-panel">
+          <div class="code-editor-card">
+            <div class="code-editor-header">
+              <div class="code-editor-title">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="code-filename">Dino.lua - Synchronized Configuration</span>
+              </div>
+              <div class="code-editor-actions">
+                <button id="copySourceCodeBtn" class="btn btn-tactical btn-sm" type="button">
+                  COPY CODE
+                </button>
+              </div>
+            </div>
             <div class="code-box">
-              <pre><code>-- DINO - RECOIL COMPENSATION SYSTEM FOR PUBG PC (LOGITECH G HUB)
--- HARDWARE BASELINE: 800 DPI | SensSetting = 1.00 (In-Game Sens: 50) | Win Pointer: 6-11
-
-local MOUSE_DPI = 800
-local SensSetting = 1.00
-
--- Recovery-Damping Exponent
-local SplineResponseGamma = 0.32
-
--- Feature Toggles
-local EnableCrouchMode  = true
-local EnableProneMode   = false
-local EnableHoldBreath  = true
-local EnableAttachments = true
-local AttachmentsMode   = "NUMLOCK"      -- "NUMLOCK" or "ALWAYS"
-
--- Operation Modes
-local ClickMode          = 1             -- 1 = LMB only, 3 = RMB + LMB
-local DMR_AUTO_TAP       = true          -- Rapid single-tap cycling on DMRs
-local HorizontalStrength = 0.60          -- Master horizontal bias multiplier
-
--- State Management
-local WEAPON_TOGGLE_MODE        = "ANY"
-local SYNC_CAPSLOCK_LED         = true
-local REQUIRE_CAPSLOCK_FOR_FIRE = false
-local ENABLE_LOGGING            = true</code></pre>
+              <pre><code id="liveCodeOutput"></code></pre>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   </main>
@@ -499,7 +730,10 @@ local ENABLE_LOGGING            = true</code></pre>
   <footer class="footer">
     <div class="container footer-container">
       <div class="footer-info">
-        <span class="footer-brand">PUBG-NO-RECOIL-SCRIPTS</span>
+        <div class="footer-brand-row">
+          <img src="img/logitech_logo.png" alt="Logitech G" class="footer-logo-img">
+          <span class="footer-brand">PUBG-NO-RECOIL-SCRIPTS</span>
+        </div>
         <p class="footer-note">Client-side hardware Lua macro for Logitech gaming mice. 100% local driver execution.</p>
       </div>
       <div class="footer-links">
