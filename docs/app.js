@@ -126,13 +126,17 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderLiveCode() {
     if (!liveCodeOutput) return;
 
-    const code = `-- DINO - RECOIL COMPENSATION SYSTEM FOR PUBG PC (LOGITECH G HUB)
+    const code = `-- DINO V11 - RECOIL COMPENSATION SYSTEM FOR PUBG PC (LOGITECH G HUB)
 -- HARDWARE BASELINE: 800 DPI | SensSetting = 1.00 (In-Game Sens: 50) | Win Pointer: 6-11
 
 local MOUSE_DPI = 800
 local SensSetting = 1.00
 
--- Recovery-Damping Exponent
+-- Vertical-only trims . Tune in 0.01 steps for your ADS settings.
+local SprayVerticalGain = 1.04  -- Full-auto and burst
+local DMRVerticalGain   = 1.05  -- Per tap, independent of the refire cadence
+
+-- UE4 Spline Recovery-Damping Exponent
 local SplineResponseGamma = ${configState.gamma.toFixed(2)}
 
 -- Feature Toggles

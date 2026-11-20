@@ -4,7 +4,7 @@ All notable changes, architectural enhancements, ballistic calibrations, and bug
 
 The format is structured in reverse-chronological order (newest release first) following standard software release guidelines.
 
-[![Latest Release](https://img.shields.io/badge/Latest-v10.0-00C853?style=for-the-badge)](#v100--ue4-cubic-hermite-spline-engine--full-ballistic-overhaul)
+[![Latest Release](https://img.shields.io/badge/Latest-v11.0-00C853?style=for-the-badge)](#v110--dmr-hermite-spline-engine-magazine-tracking--vertical-gain-calibration)
 [![Platform](https://img.shields.io/badge/Platform-Logitech%20G%20Hub%20Lua-00A8FF?style=for-the-badge)](#)
 [![PUBG Version](https://img.shields.io/badge/PUBG%20PC-v44+-FF6F00?style=for-the-badge)](#)
 [![License](https://img.shields.io/badge/License-MIT-607D8B?style=for-the-badge)](#)
@@ -13,6 +13,7 @@ The format is structured in reverse-chronological order (newest release first) f
 
 ## Quick Navigation
 
+* [v11.0 — DMR Hermite Spline Engine, Magazine Tracking & Vertical Gain Calibration](#v110--dmr-hermite-spline-engine-magazine-tracking--vertical-gain-calibration)
 * [v10.0 — UE4 Cubic Hermite Spline Engine & Full Ballistic Overhaul](#v100--ue4-cubic-hermite-spline-engine--full-ballistic-overhaul)
 * [v9.2 — Weapon Tuner Calibration & Recoil Curve Refinements](#v92--weapon-tuner-calibration--recoil-curve-refinements)
 * [v9.1 — Modifier Tier Table & State Management Cleanup](#v91--modifier-tier-table--state-management-cleanup)
@@ -26,6 +27,19 @@ The format is structured in reverse-chronological order (newest release first) f
 * [v2.0 — Ballistic Progressive Decay](#v20--recoil-engine-rewrite)
 * [v1.0 — Modifier Keybind System & Engine Tuning](#v10--modifier-keybind-system--engine-tuning)
 * [Comprehensive Version Feature Matrix](#comprehensive-feature-matrix)
+
+---
+
+## [v11.0] — DMR Hermite Spline Engine, Magazine Tracking & Vertical Gain Calibration
+> **Release File:** [`Dino-V11.lua`](Dino-V11.lua)  
+> **Base Architecture:** Complete mathematical calibration of semi-automatic Designated Marksman Rifles onto the UE4 cubic Hermite spline curve pipeline. Integrated magazine capacity tracking, reload gap detection, and vertical gain multipliers for ADS tuning.
+
+### Added
+* **DMR UE4 Cubic Hermite Spline Curves**: Dedicated mathematical keyframe spline tables for all semi-automatic DMR platforms (`Dragunov (SVD)`, `SLR`, `SKS`, `Mini-14`, and `Mk12`), delivering dynamic per-shot climb and recovery evaluation rather than static step pull approximations.
+* **Vertical Gain Tuning Trims**: Introduced user-configurable vertical scalars `SprayVerticalGain` (`1.04` default for full-auto/burst) and `DMRVerticalGain` (`1.05` default per single-tap) enabling fine adjustments to individual in-game ADS sensitivity without altering baseline physics curves.
+* **Magazine Round Tracking & Tactical Reload Detection**: Added HUD capacity state (`mag_rounds`) and reload recovery timing thresholds (`reload_ms`) across all 32 weapons. Recoil compensation automatically pauses when a magazine is depleted, eliminating cursor drop or erroneous pull during empty-magazine clicks and reload cycles.
+* **Frame-Safe DMR Button Polling**: Replaced static sleep loops with adaptive polling intervals (`button_poll_ms`) calibrated per DMR archetype for responsive trigger releases and zero input buffer stalls.
+* **Streamlined Repository Structure**: Maintained Dino-V11 exclusively on `main` for clean production deployment.
 
 ---
 
@@ -188,30 +202,33 @@ The format is structured in reverse-chronological order (newest release first) f
 
 ## Comprehensive Feature Matrix
 
-| Feature / Architectural Milestone | v1.0 | v2.0 | v3.0 | v4.0 | v5.0 | v6.0 | v7.0 | v8.0 | v9.0-v9.2 | v10.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Modifier Keybind System (+100 to +600)** | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| **Compound Modifiers (+700 to +1200)** | — | — | — | — | — | — | — | Yes | Yes | Yes |
-| **Smooth Progressive Decay Shaper** | — | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| **First-Bullet Kick Mitigation** | — | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| **Multi-Click Burst Memory** | — | — | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| **Spray Transfer Detection** | — | — | — | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| **Elapsed-Time Tick Compensation** | — | — | — | — | Yes | Yes | Yes | Yes | Yes | Yes |
-| **Centralized WeaponTuner Panel** | — | — | — | — | — | Yes | Yes | Yes | Yes | Yes |
-| **RPD 7.62mm LMG Profile** | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
-| **Full Active Arsenal (32+ Weapons)** | — | — | — | — | — | — | — | Yes | Yes | Yes |
-| **Dedicated Per-Weapon DMR Engine** | — | — | — | — | — | Generic | Generic | Yes | Yes | Yes |
-| **Burst-Fire Engine (Mutant & M16A4)** | — | — | — | — | — | — | — | Yes | Yes | Yes |
-| **Direct Middle-Click Standby** | — | — | — | — | — | — | — | Yes | Yes | Yes |
-| **Extended Full Spray Recoil Hold** | — | — | — | — | — | — | — | Yes | Yes | Yes |
-| **Zero-Allocation File-Scope State** | — | — | — | — | — | — | — | Yes | Yes | Yes |
-| **Sub-Pixel Float Remainder Accumulator** | — | — | — | — | — | — | — | Yes | Yes | Yes |
-| **Transparent Micro H-Bias** | — | — | — | — | — | — | — | Yes | Yes | Yes |
-| **Headshot Center-Lock (Ticks 1-8: 0.0)** | — | — | — | — | — | — | — | Yes | Yes | Yes |
-| **Continuous Full-Auto Recoil Hold** | — | — | — | — | — | — | — | — | Yes | Yes |
-| **UE4 Hermite Cubic Spline Engine** | — | — | — | — | — | — | — | — | — | Yes |
-| **Game-Calibrated Stance Multipliers** | — | — | — | — | — | — | — | — | — | Yes |
-| **Compound Attachment Pool Scaling** | — | — | — | — | — | — | — | — | — | Yes |
+| Feature / Architectural Milestone | v1.0 | v2.0 | v3.0 | v4.0 | v5.0 | v6.0 | v7.0 | v8.0 | v9.0-v9.2 | v10.0 | v11.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Modifier Keybind System (+100 to +600)** | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| **Compound Modifiers (+700 to +1200)** | — | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
+| **Smooth Progressive Decay Shaper** | — | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| **First-Bullet Kick Mitigation** | — | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| **Multi-Click Burst Memory** | — | — | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| **Spray Transfer Detection** | — | — | — | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| **Elapsed-Time Tick Compensation** | — | — | — | — | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| **Centralized WeaponTuner Panel** | — | — | — | — | — | Yes | Yes | Yes | Yes | Yes | Yes |
+| **RPD 7.62mm LMG Profile** | — | — | — | — | — | — | Yes | Yes | Yes | Yes | Yes |
+| **Full Active Arsenal (32+ Weapons)** | — | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
+| **Dedicated Per-Weapon DMR Engine** | — | — | — | — | — | Generic | Generic | Yes | Yes | Yes | Yes |
+| **Burst-Fire Engine (Mutant & M16A4)** | — | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
+| **Direct Middle-Click Standby** | — | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
+| **Extended Full Spray Recoil Hold** | — | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
+| **Zero-Allocation File-Scope State** | — | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
+| **Sub-Pixel Float Remainder Accumulator** | — | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
+| **Transparent Micro H-Bias** | — | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
+| **Headshot Center-Lock (Ticks 1-8: 0.0)** | — | — | — | — | — | — | — | Yes | Yes | Yes | Yes |
+| **Continuous Full-Auto Recoil Hold** | — | — | — | — | — | — | — | — | Yes | Yes | Yes |
+| **UE4 Hermite Cubic Spline Engine** | — | — | — | — | — | — | — | — | — | Yes | Yes |
+| **Game-Calibrated Stance Multipliers** | — | — | — | — | — | — | — | — | — | Yes | Yes |
+| **Compound Attachment Pool Scaling** | — | — | — | — | — | — | — | — | — | Yes | Yes |
+| **DMR Cubic Hermite Spline Evaluation** | — | — | — | — | — | — | — | — | — | — | Yes |
+| **Magazine Capacity Tracking & Reload Gate** | — | — | — | — | — | — | — | — | — | — | Yes |
+| **ADS Vertical Gain Trims (Spray/DMR)** | — | — | — | — | — | — | — | — | — | — | Yes |
 
 ---
 

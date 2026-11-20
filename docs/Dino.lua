@@ -6,7 +6,7 @@
 --  __/ (  | (  |         | |_| | | | | | (_) |
 -- /__.-'|_|--|_|         |____/|_|_| |_|\___/ 
 --
--- DINO - RECOIL COMPENSATION SYSTEM FOR PUBG PC (LOGITECH G HUB)
+-- DINO V11 - UE4 CUBIC HERMITE SPLINE BALLISTIC ENGINE FOR PUBG PC (LOGITECH G HUB)
 -------------------------------------------------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------------------------------------------------
@@ -16,7 +16,11 @@
 local MOUSE_DPI = 800
 local SensSetting = 1.00
 
--- Recovery-Damping Exponent (0.25 = flatter late spray, 0.32 = calibrated PUBG equilibrium, 0.50 = steep climb)
+-- Vertical-only trims . Tune in 0.01 steps for your ADS settings.
+local SprayVerticalGain = 1.04  -- Full-auto and burst
+local DMRVerticalGain   = 1.05  -- Per tap, independent of the refire cadence
+
+-- UE4 Spline Recovery-Damping Exponent (0.25 = flatter late spray, 0.32 = calibrated PUBG equilibrium, 0.50 = steep climb)
 local SplineResponseGamma = 0.32
 
 -- Feature Toggles
@@ -29,7 +33,7 @@ local AttachmentsMode   = "NUMLOCK"      -- "NUMLOCK" or "ALWAYS"
 -- Operation Modes
 local ClickMode          = 1             -- 1 = LMB only, 3 = RMB + LMB
 local DMR_AUTO_TAP       = true          -- True = Auto-cycling rapid single-taps on hold
-local HorizontalStrength = 0.60          -- Master horizontal bias multiplier (0.00 to 1.00)
+local HorizontalStrength = 0.60          -- 0 leaves lateral aim to the player. Raise only for repeatable one-sided drift.
 
 -- State Management
 local WEAPON_TOGGLE_MODE        = "ANY"  -- "ANY" = any weapon button toggles standby, "SAME" = current button only
@@ -81,17 +85,17 @@ local WeaponTuner = {
     RPD      = { stand = 2.04, crouch = 1.18, prone = 0.48, att_scale = 0.82, att_h_scale = 0.92, h_bias =  0.000, is_762 = true },
 
     -- Designated Marksman Rifles (Per-Shot Spline Escalation & Frame-Safe Refire Cadence)
-    DRAGUNOV = { stand = 1.00, crouch = 0.75, prone = 0.55, att_scale = 0.72, att_h_scale = 0.72, pull = 36, h_pull =  0.0, steps = 4, sleep = 10, delay = 345, ramp = 0.12 },
-    SLR      = { stand = 1.00, crouch = 0.75, prone = 0.55, att_scale = 0.72, att_h_scale = 0.72, pull = 30, h_pull =  0.0, steps = 4, sleep = 8,  delay = 195, ramp = 0.08 },
-    SKS      = { stand = 1.00, crouch = 0.75, prone = 0.55, att_scale = 0.76, att_h_scale = 0.72, pull = 26, h_pull =  0.0, steps = 4, sleep = 8,  delay = 195, ramp = 0.07 },
+    DRAGUNOV = { stand = 1.00, crouch = 0.75, prone = 0.55, att_scale = 0.72, att_h_scale = 0.72, pull = 36, h_pull =  0.0, steps = 4, button_poll_ms = 46, delay = 345 },
+    SLR      = { stand = 1.00, crouch = 0.75, prone = 0.55, att_scale = 0.72, att_h_scale = 0.72, pull = 30, h_pull =  0.0, steps = 4, button_poll_ms = 38, delay = 195 },
+    SKS      = { stand = 1.00, crouch = 0.75, prone = 0.55, att_scale = 0.76, att_h_scale = 0.72, pull = 26, h_pull =  0.0, steps = 4, button_poll_ms = 38, delay = 195 },
     MK14     = { stand = 4.10, crouch = 3.07, prone = 2.15, att_scale = 0.72, att_h_scale = 0.72, h_bias =  0.045, is_762 = true },
-    MINI14   = { stand = 1.00, crouch = 0.75, prone = 0.55, att_scale = 0.80, att_h_scale = 0.90, pull = 17, h_pull =  0.0, steps = 4, sleep = 8,  delay = 195, ramp = 0.07 },
-    MK12     = { stand = 1.00, crouch = 0.75, prone = 0.20, att_scale = 0.70, att_h_scale = 0.90, pull = 16, h_pull =  0.0, steps = 4, sleep = 8,  delay = 195, ramp = 0.08 },
+    MINI14   = { stand = 1.00, crouch = 0.75, prone = 0.55, att_scale = 0.80, att_h_scale = 0.90, pull = 17, h_pull =  0.0, steps = 4, button_poll_ms = 38, delay = 195 },
+    MK12     = { stand = 1.00, crouch = 0.75, prone = 0.20, att_scale = 0.70, att_h_scale = 0.90, pull = 16, h_pull =  0.0, steps = 4, button_poll_ms = 38, delay = 195 },
     VSS      = { stand = 2.25, crouch = 1.69, prone = 1.25, att_scale = 0.85, att_h_scale = 0.85, h_bias =  0.000, is_smg = true },
 }
 
 -------------------------------------------------------------------------------------------------------------------------
--- [3] KEYBINDINGS (100% MUSCLE-MEMORY PARITY WITH DINO V9)
+-- [3] KEYBINDINGS 
 -------------------------------------------------------------------------------------------------------------------------
 
 -- MODIFIER TIER TABLE:
@@ -163,12 +167,51 @@ local KeyboardBinds = {
 }
 
 -------------------------------------------------------------------------------------------------------------------------
--- [4]  WEAPON RECOIL CURVES & DATABASE
+-- [4]  UE4 CUBIC HERMITE SPLINE ENGINE & WEAPON DATABASE
 -------------------------------------------------------------------------------------------------------------------------
 -- Format per keyframe: { t = time_sec, v = value, at = arrive_tangent, lt = leave_tangent, m = "C" (Cubic) or "L" (Linear) }
 -------------------------------------------------------------------------------------------------------------------------
 
 local UE4Splines = {
+    DRAGUNOV = {
+        v = {
+            { t = 0, v = 0.72, at = 0.11842197, lt = 0, m = "C" },
+            { t = 1.2, v = 1.52, at = 0.9545454, lt = 0.9545454, m = "C" },
+            { t = 2.2, v = 2.4, at = 0, lt = 0, m = "L" },
+        },
+    },
+    SLR = {
+        v = {
+            { t = 0, v = 0.475, at = 0.11842197, lt = 0.118423104, m = "C" },
+            { t = 0.396, v = 0.6175, at = 1.0765599, lt = 1.0765543, m = "C" },
+            { t = 1.44, v = 1.2825, at = 0.55369943, lt = 0.5536986, m = "C" },
+            { t = 2.2, v = 1.615, at = 0, lt = 0, m = "L" },
+        },
+    },
+    SKS = {
+        v = {
+            { t = 0, v = 0.5, at = 0.10995011, lt = 0.10995011, m = "C" },
+            { t = 0.4, v = 0.6, at = 0.80484325, lt = 0.8048357, m = "C" },
+            { t = 1.2, v = 1.3, at = 0.60943717, lt = 0.60943747, m = "C" },
+            { t = 2.7, v = 1.7, at = -0.016775565, lt = -0.016775604, m = "C" },
+        },
+    },
+    MINI14 = {
+        v = {
+            { t = 0, v = 0.35, at = 0.673217, lt = 0.6732152, m = "C" },
+            { t = 0.5, v = 0.45, at = 0.32907644, lt = 0.3290762, m = "C" },
+            { t = 1, v = 0.8, at = 1.3161007, lt = 1.3161023, m = "C" },
+            { t = 2.2, v = 1.5, at = 0, lt = 0.12638389, m = "C" },
+        },
+    },
+    MK12 = {
+        v = {
+            { t = 0, v = 0.462, at = 0.1319698, lt = 0.13196899, m = "C" },
+            { t = 0.5, v = 0.605, at = 0.32907644, lt = 0.3290762, m = "C" },
+            { t = 1, v = 1.045, at = 1.3161007, lt = 1.3161023, m = "C" },
+            { t = 2.2, v = 1.76, at = 0, lt = 0.12638389, m = "C" },
+        },
+    },
     HK416 = {
         v = {
             { t = 0.000000, v = 0.360000, at = 0.469369, lt = 0.469371, m = "C" },
@@ -545,76 +588,90 @@ local function GenerateSplineHorizontalBias(spline_name, bias_strength, tick_ms,
     return curve
 end
 
+-- mag_rounds is the loaded HUD count with an Extended Mag (fixed capacity for P90/MG3).
+-- reload_ms is the minimum idle gap used to infer a fresh magazine.
 local Weapons = {
     -- Assault Rifles ( UE4 Spline Calibrated)
     [BIND_M416] = {
         name = "M416", type = "AUTO", caliber = "5.56", rpm = 700, tbs_ms = 85.7, tick_ms = 17, rsv = 12.0,
+        mag_rounds = 42, reload_ms = 2700,
         v_curve = GenerateSplineSpray("HK416", 3.794, 12.0, 17, 360),
         h_curve = GenerateSplineHorizontalBias("HK416", WeaponTuner.M416.h_bias, 17, 360, 8),
         tuner = WeaponTuner.M416
     },
     [BIND_BERRYL] = {
         name = "Beryl M762", type = "AUTO", caliber = "7.62", rpm = 700, tbs_ms = 85.7, tick_ms = 17, rsv = 16.5,
+        mag_rounds = 42, reload_ms = 2250,
         v_curve = GenerateSplineSpray("BERRYL", 4.798, 16.5, 17, 360),
         h_curve = GenerateSplineHorizontalBias("BERRYL", WeaponTuner.BERRYL.h_bias, 17, 360, 8),
         tuner = WeaponTuner.BERRYL
     },
     [BIND_AKM] = {
         name = "AKM", type = "AUTO", caliber = "7.62", rpm = 600, tbs_ms = 100.0, tick_ms = 20, rsv = 15.0,
+        mag_rounds = 42, reload_ms = 2250,
         v_curve = GenerateSplineSpray("AKM", 4.664, 15.0, 20, 320),
         h_curve = GenerateSplineHorizontalBias("AKM", WeaponTuner.AKM.h_bias, 20, 320, 7),
         tuner = WeaponTuner.AKM
     },
     [BIND_AUG] = {
         name = "AUG A3", type = "AUTO", caliber = "5.56", rpm = 720, tbs_ms = 83.3, tick_ms = 17, rsv = 10.0,
+        mag_rounds = 42, reload_ms = 3000,
         v_curve = GenerateSplineSpray("AUG", 4.385, 10.0, 17, 360),
         h_curve = GenerateSplineHorizontalBias("AUG", WeaponTuner.AUG.h_bias, 17, 360, 9),
         tuner = WeaponTuner.AUG
     },
     [BIND_ACE32] = {
         name = "ACE32", type = "AUTO", caliber = "7.62", rpm = 680, tbs_ms = 88.2, tick_ms = 17, rsv = 15.0,
+        mag_rounds = 42, reload_ms = 2700,
         v_curve = GenerateSplineSpray("ACE32", 4.443, 15.0, 17, 360),
         h_curve = GenerateSplineHorizontalBias("ACE32", WeaponTuner.ACE32.h_bias, 17, 360, 8),
         tuner = WeaponTuner.ACE32
     },
     [BIND_SCAR_L] = {
         name = "SCAR-L", type = "AUTO", caliber = "5.56", rpm = 650, tbs_ms = 92.3, tick_ms = 18, rsv = 15.0,
+        mag_rounds = 42, reload_ms = 2700,
         v_curve = GenerateSplineSpray("SCAR_L", 3.348, 15.0, 18, 340),
         h_curve = GenerateSplineHorizontalBias("SCAR_L", WeaponTuner.SCAR_L.h_bias, 18, 340, 8),
         tuner = WeaponTuner.SCAR_L
     },
     [BIND_QBZ] = {
         name = "QBZ95", type = "AUTO", caliber = "5.56", rpm = 650, tbs_ms = 92.3, tick_ms = 18, rsv = 14.0,
+        mag_rounds = 42, reload_ms = 3000,
         v_curve = GenerateSplineSpray("QBZ", 3.687, 14.0, 18, 340),
         h_curve = GenerateSplineHorizontalBias("QBZ", WeaponTuner.QBZ.h_bias, 18, 340, 8),
         tuner = WeaponTuner.QBZ
     },
     [BIND_G36C] = {
         name = "G36C", type = "AUTO", caliber = "5.56", rpm = 700, tbs_ms = 85.7, tick_ms = 17, rsv = 15.0,
+        mag_rounds = 42, reload_ms = 3000,
         v_curve = GenerateSplineSpray("G36C", 3.824, 15.0, 17, 360),
         h_curve = GenerateSplineHorizontalBias("G36C", WeaponTuner.G36C.h_bias, 17, 360, 8),
         tuner = WeaponTuner.G36C
     },
     [BIND_K2] = {
         name = "K2", type = "AUTO", caliber = "5.56", rpm = 700, tbs_ms = 85.7, tick_ms = 17, rsv = 13.0,
+        mag_rounds = 42, reload_ms = 2700,
         v_curve = GenerateSplineSpray("K2", 3.883, 13.0, 17, 360),
         h_curve = GenerateSplineHorizontalBias("K2", WeaponTuner.K2.h_bias, 17, 360, 9),
         tuner = WeaponTuner.K2
     },
     [BIND_GROZA] = {
         name = "Groza", type = "AUTO", caliber = "7.62", rpm = 750, tbs_ms = 80.0, tick_ms = 16, rsv = 14.0,
+        mag_rounds = 42, reload_ms = 2250,
         v_curve = GenerateSplineSpray("BERRYL", 4.886, 14.0, 16, 360),
         h_curve = GenerateSplineHorizontalBias("BERRYL", WeaponTuner.GROZA.h_bias, 16, 360, 8),
         tuner = WeaponTuner.GROZA
     },
     [BIND_FAMAS] = {
         name = "FAMAS G2", type = "AUTO", caliber = "5.56", rpm = 900, tbs_ms = 66.7, tick_ms = 13, rsv = 10.0,
+        mag_rounds = 42, reload_ms = 2700,
         v_curve = GenerateSplineSpray("FAMAS", 3.313, 10.0, 13, 420),
         h_curve = GenerateSplineHorizontalBias("FAMAS", WeaponTuner.FAMAS.h_bias, 13, 420, 10),
         tuner = WeaponTuner.FAMAS
     },
     [BIND_MUTANT] = {
         name = "Mk47 Mutant", type = "BURST", caliber = "7.62", rpm = 800, tbs_ms = 75.0, burst_count = 2,
+        mag_rounds = 32, reload_ms = 2700,
         v_curve = { 13.8, 16.5 },
         h_curve = { 0.0, 0.0 },
         burst_escalation = { 1.00, 1.12, 1.20, 1.25 },
@@ -622,6 +679,7 @@ local Weapons = {
     },
     [BIND_M16A4] = {
         name = "M16A4", type = "BURST", caliber = "5.56", rpm = 800, tbs_ms = 75.0, burst_count = 3,
+        mag_rounds = 42, reload_ms = 1900,
         v_curve = { 9.8, 12.0, 13.6 },
         h_curve = { 0.0, 0.0, 0.0 },
         burst_escalation = { 1.00, 1.12, 1.20, 1.26 },
@@ -631,48 +689,56 @@ local Weapons = {
     -- Submachine Guns ( UE4 Spline Calibrated)
     [BIND_UMP45] = {
         name = "UMP45 (UMP9)", type = "AUTO", caliber = "9mm", rpm = 670, tbs_ms = 89.6, tick_ms = 18, rsv = 10.0,
+        mag_rounds = 37, reload_ms = 2550,
         v_curve = GenerateSplineSpray("UMP9", 3.129, 10.0, 18, 340),
         h_curve = GenerateSplineHorizontalBias("UMP9", WeaponTuner.UMP45.h_bias, 18, 340, 8),
         tuner = WeaponTuner.UMP45
     },
     [BIND_VECTOR] = {
         name = "Vector", type = "AUTO", caliber = "9mm", rpm = 1101, tbs_ms = 54.5, tick_ms = 11, rsv = 15.0,
+        mag_rounds = 35, reload_ms = 2100,
         v_curve = GenerateSplineSpray("VECTOR", 3.047, 15.0, 11, 420),
         h_curve = GenerateSplineHorizontalBias("VECTOR", WeaponTuner.VECTOR.h_bias, 11, 420, 10),
         tuner = WeaponTuner.VECTOR
     },
     [BIND_UZI] = {
         name = "Micro UZI", type = "AUTO", caliber = "9mm", rpm = 1250, tbs_ms = 48.0, tick_ms = 10, rsv = 15.0,
+        mag_rounds = 37, reload_ms = 2500,
         v_curve = GenerateSplineSpray("UZI", 2.755, 15.0, 10, 460),
         h_curve = GenerateSplineHorizontalBias("UZI", WeaponTuner.UZI.h_bias, 10, 460, 10),
         tuner = WeaponTuner.UZI
     },
     [BIND_MP5K] = {
         name = "MP5K", type = "AUTO", caliber = "9mm", rpm = 901, tbs_ms = 66.6, tick_ms = 13, rsv = 12.0,
+        mag_rounds = 42, reload_ms = 2750,
         v_curve = GenerateSplineSpray("MP5K", 3.286, 12.0, 13, 380),
         h_curve = GenerateSplineHorizontalBias("MP5K", WeaponTuner.MP5K.h_bias, 13, 380, 9),
         tuner = WeaponTuner.MP5K
     },
     [BIND_TOMMY] = {
         name = "Tommy Gun", type = "AUTO", caliber = ".45", rpm = 750, tbs_ms = 80.0, tick_ms = 16, rsv = 15.0,
+        mag_rounds = 55, reload_ms = 2850,
         v_curve = GenerateSplineSpray("THOMPSON", 2.994, 15.0, 16, 380),
         h_curve = GenerateSplineHorizontalBias("THOMPSON", WeaponTuner.TOMMY.h_bias, 16, 380, 9),
         tuner = WeaponTuner.TOMMY
     },
     [BIND_P90] = {
         name = "P90", type = "AUTO", caliber = "5.7mm", rpm = 1000, tbs_ms = 60.0, tick_ms = 12, rsv = 11.0,
+        mag_rounds = 50, reload_ms = 2600,
         v_curve = GenerateSplineSpray("MP9", 3.313, 11.0, 12, 420),
         h_curve = GenerateSplineHorizontalBias("MP9", WeaponTuner.P90.h_bias, 12, 420, 10),
         tuner = WeaponTuner.P90
     },
     [BIND_MP9] = {
         name = "MP9", type = "AUTO", caliber = "9mm", rpm = 1000, tbs_ms = 60.0, tick_ms = 12, rsv = 11.0,
+        mag_rounds = 42, reload_ms = 2100,
         v_curve = GenerateSplineSpray("MP9", 3.190, 11.0, 12, 420),
         h_curve = GenerateSplineHorizontalBias("MP9", WeaponTuner.MP9.h_bias, 12, 420, 10),
         tuner = WeaponTuner.MP9
     },
     [BIND_JS9] = {
         name = "JS9", type = "AUTO", caliber = "9mm", rpm = 900, tbs_ms = 66.7, tick_ms = 13, rsv = 11.0,
+        mag_rounds = 42, reload_ms = 2100,
         v_curve = GenerateSplineSpray("JS9", 3.300, 11.0, 13, 380),
         h_curve = GenerateSplineHorizontalBias("JS9", WeaponTuner.JS9.h_bias, 13, 380, 10),
         tuner = WeaponTuner.JS9
@@ -681,18 +747,21 @@ local Weapons = {
     -- Light Machine Guns (Update 44.1 UE4 Spline Calibrated with Full-Magazine Sustained Relief)
     [BIND_M249] = {
         name = "M249", type = "AUTO", caliber = "5.56", rpm = 800, tbs_ms = 75.0, tick_ms = 15, rsv = 15.0,
+        mag_rounds = 160, reload_ms = 7100,
         v_curve = GenerateSplineSpray("M249", 3.460, 15.0, 15, 600),
         h_curve = GenerateSplineHorizontalBias("M249", WeaponTuner.M249.h_bias, 15, 600, 10),
         tuner = WeaponTuner.M249
     },
     [BIND_MG3] = {
         name = "MG3", type = "AUTO", caliber = "7.62", rpm = 990, tbs_ms = 60.6, tick_ms = 12, rsv = 16.0,
+        mag_rounds = 75, reload_ms = 5600,
         v_curve = GenerateSplineSpray("MG3", 2.950, 16.0, 12, 680),
         h_curve = GenerateSplineHorizontalBias("MG3", WeaponTuner.MG3.h_bias, 12, 680, 10),
         tuner = WeaponTuner.MG3
     },
     [BIND_RPD] = {
         name = "RPD", type = "AUTO", caliber = "7.62", rpm = 750, tbs_ms = 80.0, tick_ms = 16, rsv = 15.5,
+        mag_rounds = 110, reload_ms = 6110,
         v_curve = GenerateSplineSpray("RPD", 3.280, 15.5, 16, 550),
         h_curve = GenerateSplineHorizontalBias("RPD", WeaponTuner.RPD.h_bias, 16, 550, 9),
         tuner = WeaponTuner.RPD
@@ -700,33 +769,45 @@ local Weapons = {
 
     -- Designated Marksman Rifles ( Per-Shot & Full-Auto Calibrated)
     [BIND_DRAGUNOV] = {
-        name = "Dragunov (SVD)", type = "DMR", caliber = "7.62", rpm = 180, tbs_ms = 333.3, max_mag = 25,
+        name = "Dragunov (SVD)", type = "DMR", caliber = "7.62", rpm = 180, tbs_ms = 333.3,
+        mag_rounds = 22, reload_ms = 2780,
+        tap_curve = UE4Splines.DRAGUNOV.v,
         tuner = WeaponTuner.DRAGUNOV
     },
     [BIND_SLR] = {
-        name = "SLR", type = "DMR", caliber = "7.62", rpm = 330, tbs_ms = 181.8, max_mag = 25,
+        name = "SLR", type = "DMR", caliber = "7.62", rpm = 330, tbs_ms = 181.8,
+        mag_rounds = 22, reload_ms = 2780,
+        tap_curve = UE4Splines.SLR.v,
         tuner = WeaponTuner.SLR
     },
     [BIND_SKS] = {
-        name = "SKS", type = "DMR", caliber = "7.62", rpm = 330, tbs_ms = 181.8, max_mag = 25,
+        name = "SKS", type = "DMR", caliber = "7.62", rpm = 330, tbs_ms = 181.8,
+        mag_rounds = 22, reload_ms = 2350,
+        tap_curve = UE4Splines.SKS.v,
         tuner = WeaponTuner.SKS
     },
     [BIND_MK14] = {
         name = "Mk14 EBR", type = "AUTO", caliber = "7.62", rpm = 670, tbs_ms = 90.0, tick_ms = 15, rsv = 11.5,
+        mag_rounds = 22, reload_ms = 2780,
         v_curve = GenerateSplineSpray("BERRYL", 5.175, 11.5, 15, 360),
         h_curve = GenerateSplineHorizontalBias("BERRYL", WeaponTuner.MK14.h_bias, 15, 360, 8),
         tuner = WeaponTuner.MK14
     },
     [BIND_MINI14] = {
-        name = "Mini 14", type = "DMR", caliber = "5.56", rpm = 330, tbs_ms = 181.8, max_mag = 35,
+        name = "Mini 14", type = "DMR", caliber = "5.56", rpm = 330, tbs_ms = 181.8,
+        mag_rounds = 32, reload_ms = 2700,
+        tap_curve = UE4Splines.MINI14.v,
         tuner = WeaponTuner.MINI14
     },
     [BIND_MK12] = {
-        name = "Mk12", type = "DMR", caliber = "5.56", rpm = 330, tbs_ms = 181.8, max_mag = 35,
+        name = "Mk12", type = "DMR", caliber = "5.56", rpm = 330, tbs_ms = 181.8,
+        mag_rounds = 32, reload_ms = 2700,
+        tap_curve = UE4Splines.MK12.v,
         tuner = WeaponTuner.MK12
     },
     [BIND_VSS] = {
         name = "VSS Vintorez", type = "AUTO", caliber = "9mm", rpm = 700, tbs_ms = 85.7, tick_ms = 17, rsv = 10.5,
+        mag_rounds = 22, reload_ms = 2100,
         v_curve = GenerateSplineSpray("UMP9", 3.007, 10.5, 17, 360),
         h_curve = GenerateSplineHorizontalBias("UMP9", WeaponTuner.VSS.h_bias, 17, 360, 8),
         tuner = WeaponTuner.VSS
@@ -745,10 +826,10 @@ local remainder_x = 0.0
 local remainder_y = 0.0
 
 local spray_tick_count = 0
-local saved_spray_tick_count = 0
 local last_tick_time = 0
-local last_valid_y = 0.0
 local last_macro_end_time = 0
+local rounds_left = 0
+local last_fire_end = nil
 local emergency_off_requested = false
 
 local function LogMessage(msg)
@@ -770,7 +851,7 @@ local function LogBanner()
     LogMessage(" __/ (  | (  |         | |_| | | | | | (_) |")
     LogMessage("/__.-'|_|--|_|         |____/|_|_| |_|\\___/ ")
     LogMessage("")
-    LogMessage("[DINO V10] UE4 CUBIC SPLINE BALLISTIC ENGINE FOR PUBG PC")
+    LogMessage("[DINO V11] UE4 CUBIC SPLINE BALLISTIC ENGINE FOR PUBG PC")
     LogMessage("----------------------------------------------------------------")
 end
 
@@ -778,9 +859,7 @@ local function ResetSprayState()
     remainder_x = 0.0
     remainder_y = 0.0
     spray_tick_count = 0
-    saved_spray_tick_count = 0
     last_tick_time = 0
-    last_valid_y = 0.0
 end
 
 local function ApplySubPixelMove(delta_x, delta_y)
@@ -854,203 +933,107 @@ local function GetRecoilModifiers(tuner)
     return stance_mult, att_v_mult, att_h_mult
 end
 
--- Phase-Locked UE4 Spline Auto-Recoil Engine
+-- Each curve entry is a displacement for one nominal tick. Pay each due entry
+-- once, including when Sleep wakes between deadlines or misses a tick.
 local function ExecuteAutoRecoil(w)
-    local now = GetRunningTime()
-    local time_gap = now - last_tick_time
-
-    if time_gap > 200 then
-        if time_gap <= 380 and saved_spray_tick_count <= 40 then
-            spray_tick_count = saved_spray_tick_count
-        elseif time_gap <= 380 and saved_spray_tick_count > 40 then
-            spray_tick_count = 10
-        else
-            spray_tick_count = 0
-            remainder_x = 0.0
-            remainder_y = 0.0
-        end
+    local started = GetRunningTime()
+    local time_gap = started - last_tick_time
+    if time_gap > 380 then
+        ResetSprayState()
+    elseif time_gap > 200 and spray_tick_count > 40 then
+        spray_tick_count = 10
     end
 
-    local tick_ms = w.tick_ms or 17
-    local v_curve = w.v_curve
-    local h_curve = w.h_curve
-    local max_ticks = #v_curve
+    local tick_ms = w.tick_ms
+    local next_tick = started
+    local last_shot = started + (rounds_left - 1) * w.tbs_ms
+    local max_ticks = #w.v_curve
+    -- After a long stall, advance the curve but limit catch-up to one shot.
+    local max_catch_up = math.max(1, math.floor(w.tbs_ms / tick_ms))
 
-    -- Anchor virtual spray origin and phase-locked deadline clock
-    local spray_origin_time = now - (spray_tick_count * tick_ms)
-    local next_tick_deadline = now
-    local prev_step_time = now - tick_ms
+    while IsMouseButtonPressed(1) and IsAimingActive() and not CheckEmergencyInterrupt() do
+        local now = GetRunningTime()
+        if now > last_shot then break end
+        if now >= next_tick then
+            local due = 1 + math.floor((now - next_tick) / tick_ms)
+            local deliver = math.min(due, max_catch_up)
+            next_tick = next_tick + due * tick_ms
+            spray_tick_count = spray_tick_count + due - deliver
 
-    repeat
-        local step_now = GetRunningTime()
-        local actual_dt = step_now - prev_step_time
-        prev_step_time = step_now
-
-        -- Elapsed-time ratio compensation (absorbs Windows OS scheduler jitter without losing pull)
-        local dt_scale = actual_dt / tick_ms
-        if dt_scale < 0.75 then
-            dt_scale = 0.75
-        elseif dt_scale > 1.35 then
-            dt_scale = 1.35
+            local stance, att_v, att_h = GetRecoilModifiers(w.tuner)
+            local v_scale = stance * att_v * SensSetting * SprayVerticalGain
+            local h_scale = stance * att_h * SensSetting * HorizontalStrength
+            for i = 1, deliver do
+                if GetRunningTime() > last_shot or not IsMouseButtonPressed(1) then break end
+                spray_tick_count = spray_tick_count + 1
+                local idx = math.min(spray_tick_count, max_ticks)
+                ApplySubPixelMove(w.h_curve[idx] * h_scale, w.v_curve[idx] * v_scale)
+            end
         end
+        Sleep(math.max(1, math.min(3, next_tick - GetRunningTime())))
+    end
 
-        spray_tick_count = spray_tick_count + 1
-        saved_spray_tick_count = spray_tick_count
-
-        -- Compute real elapsed time index along the UE4 spline curve
-        local elapsed_ms = step_now - spray_origin_time
-        local time_tick_idx = math.floor((elapsed_ms / tick_ms) + 0.5)
-        if time_tick_idx < 1 then time_tick_idx = 1 end
-        local curve_idx = spray_tick_count
-        if math.abs(time_tick_idx - spray_tick_count) >= 2 then
-            curve_idx = time_tick_idx
-        end
-
-        local stance_mult, att_v_mult, att_h_mult = GetRecoilModifiers(w.tuner)
-
-        local raw_v = 0.0
-        local raw_h = 0.0
-
-        if curve_idx <= max_ticks then
-            raw_v = v_curve[curve_idx] or v_curve[max_ticks]
-            raw_h = (h_curve and h_curve[curve_idx]) or (w.tuner.h_bias or 0.0)
-            last_valid_y = raw_v
-        else
-            raw_v = last_valid_y
-            raw_h = (h_curve and h_curve[max_ticks]) or (w.tuner.h_bias or 0.0)
-        end
-
-        local final_v = raw_v * stance_mult * att_v_mult * SensSetting * dt_scale
-
-        local final_h = 0.0
-        if HorizontalStrength > 0 and math.abs(raw_h) > 0.0005 then
-            final_h = raw_h * stance_mult * att_h_mult * SensSetting * HorizontalStrength * dt_scale
-        end
-
-        ApplySubPixelMove(final_h, final_v)
-
-        -- Phase-locked deadline sleep prevents cumulative timer drift over 30-100 round sprays
-        next_tick_deadline = next_tick_deadline + tick_ms
-        local after_move_time = GetRunningTime()
-        local sleep_ms = next_tick_deadline - after_move_time
-        if sleep_ms >= 1 then
-            Sleep(sleep_ms)
-        else
-            next_tick_deadline = after_move_time
-            Sleep(1)
-        end
-
-        last_tick_time = GetRunningTime()
-
-        if not IsMouseButtonPressed(1) then
-            break
-        end
-
-        if not IsAimingActive() or CheckEmergencyInterrupt() then
-            break
-        end
-
-    until not IsMouseButtonPressed(1)
-
+    last_tick_time = GetRunningTime()
+    local fired = 1 + math.floor((last_tick_time - started) / w.tbs_ms)
+    rounds_left = math.max(0, rounds_left - fired)
     last_macro_end_time = last_tick_time
 end
 
--- Master DMR Tap-Assist & Rapid Auto-Cycle Engine (with Anti-Echo Event Suppression & Clean Exit Release)
+local function WaitWhileFiring(deadline, button_ready_at)
+    while IsAimingActive() and not CheckEmergencyInterrupt() do
+        local now = GetRunningTime()
+        if (not button_ready_at or now >= button_ready_at) and not IsMouseButtonPressed(1) then
+            return false
+        end
+        local remaining = deadline - now
+        if remaining <= 0 then return true end
+        Sleep(math.min(remaining, 8))
+    end
+    return false
+end
+
+-- Scale successive taps from the vertical keys in per_shot_recoil_curves.json.
+-- The square root damps the raw game curve relative to the calibrated opening pull.
 local function ExecuteDMRRecoil(w)
     local t = w.tuner
-    local base_pull = t.pull or 26
-    local h_pull = (t.h_pull or 0.0) * HorizontalStrength
-    local steps = t.steps or 4
-    local sleep_per_step = t.sleep or 8
-    local inter_shot_delay = t.delay or 195
-    local rapid_ramp = t.ramp or 0.08
-
-    local stance_mult, att_v_mult, att_h_mult = GetRecoilModifiers(t)
-
-    local function CompensateSingleShot(shot_mult)
-        shot_mult = shot_mult or 1.00
-        local final_pull = base_pull * shot_mult * stance_mult * att_v_mult * SensSetting
-        local final_h = h_pull * shot_mult * stance_mult * att_h_mult * SensSetting
-        local step_v = final_pull / steps
-        local step_h = final_h / steps
-
-        for s = 1, steps do
-            if CheckEmergencyInterrupt() then return false end
-            ApplySubPixelMove(step_h, step_v)
-            Sleep(sleep_per_step)
-        end
-        return true
-    end
-
-    if not DMR_AUTO_TAP then
-        CompensateSingleShot(1.00)
-        last_macro_end_time = GetRunningTime()
-        return
-    end
-
+    local shot = 0
     local pulse_ms = 12
     local settle_ms = 6
-    local recoil_duration = steps * sleep_per_step
-    local first_shot_cooldown = inter_shot_delay - pulse_ms - recoil_duration
-    local next_shot_cooldown = inter_shot_delay - pulse_ms - settle_ms - recoil_duration
-    if first_shot_cooldown < 15 then first_shot_cooldown = 15 end
-    if next_shot_cooldown < 15 then next_shot_cooldown = 15 end
-
-    local shot_index = 0
-    -- Supports full 30-round Extended Magazine on 5.56mm DMRs (Mini 14 / Mk12) with headroom
-    local max_mag_shots = w.max_mag or 35
     local did_virtual_press = false
+    local shot_time = GetRunningTime()
+    -- V10 first read LMB after the synthetic press settled (6 ms) and four
+    -- recoil steps had elapsed (4 x 8 ms, or 4 x 10 ms for the Dragunov).
+    local button_ready_at
+    if DMR_AUTO_TAP then EnablePrimaryMouseButtonEvents(false) end
 
-    -- Suppress synthetic MOUSE_BUTTON_PRESSED(1) events while pulsing PressMouseButton(1) (as in Dino-V7)
-    -- so G Hub never queues a phantom OnEvent("MOUSE_BUTTON_PRESSED", 1) after physical LMB release!
-    EnablePrimaryMouseButtonEvents(false)
+    while rounds_left > 0 and WaitWhileFiring(shot_time, button_ready_at) do
+        local stance, att_v, att_h = GetRecoilModifiers(t)
+        local phase = shot * w.tbs_ms / 1000
+        local ratio = SampleCubicSpline(w.tap_curve, phase) / w.tap_curve[1].v
+        local pull = t.pull * DMRVerticalGain * math.sqrt(ratio) * stance * att_v * SensSetting
+        local side = t.h_pull * HorizontalStrength * stance * att_h * SensSetting
+        shot = shot + 1
+        rounds_left = rounds_left - 1
 
-    while IsMouseButtonPressed(1) and shot_index < max_mag_shots do
+        -- Spread the pull across the kick following each tap. Absolute deadlines
+        -- keep these steps inside the existing interval between button presses.
+        local spacing = math.floor(t.delay / (2 * t.steps))
+        for step = 1, t.steps do
+            local due = shot_time + settle_ms + (step - 1) * spacing
+            if not WaitWhileFiring(due, button_ready_at) or GetRunningTime() >= shot_time + t.delay then break end
+            ApplySubPixelMove(side / t.steps, pull / t.steps)
+        end
+        if not DMR_AUTO_TAP or rounds_left == 0 or emergency_off_requested then break end
+        if not WaitWhileFiring(shot_time + t.delay - pulse_ms) then break end
+
+        ReleaseMouseButton(1)
+        did_virtual_press = false
+        Sleep(pulse_ms)
         if not IsAimingActive() or CheckEmergencyInterrupt() then break end
-
-        shot_index = shot_index + 1
-
-        if shot_index > 1 then
-            if not IsMouseButtonPressed(1) or CheckEmergencyInterrupt() then break end
-            ReleaseMouseButton(1)
-            Sleep(pulse_ms)
-            if CheckEmergencyInterrupt() then
-                did_virtual_press = false
-                break
-            end
-            PressMouseButton(1)
-            did_virtual_press = true
-            Sleep(settle_ms)
-        end
-
-        stance_mult, att_v_mult, att_h_mult = GetRecoilModifiers(t)
-
-        -- Progressive DMR rapid-tap escalation from per_shot_recoil_curves.json
-        local esc_steps = math.min(shot_index - 1, 3)
-        local shot_mult = 1.00 + (esc_steps * rapid_ramp)
-
-        if not CompensateSingleShot(shot_mult) then
-            break
-        end
-
-        local active_cooldown = (shot_index == 1) and first_shot_cooldown or next_shot_cooldown
-        local sleep_cycles = math.floor(active_cooldown / 10)
-        local rem_sleep = active_cooldown - (sleep_cycles * 10)
-        local released = false
-        for c = 1, sleep_cycles do
-            if not IsMouseButtonPressed(1) or not IsAimingActive() or CheckEmergencyInterrupt() then
-                released = true
-                break
-            end
-            Sleep(10)
-        end
-        if released then break end
-        if rem_sleep > 0 then
-            if not IsMouseButtonPressed(1) or not IsAimingActive() or CheckEmergencyInterrupt() then
-                break
-            end
-            Sleep(rem_sleep)
-        end
+        PressMouseButton(1)
+        did_virtual_press = true
+        shot_time = GetRunningTime()
+        button_ready_at = shot_time + t.button_poll_ms
     end
 
     CleanupAutoTrigger(did_virtual_press)
@@ -1072,16 +1055,16 @@ local function ExecuteBurstRecoil(w)
 
     local stance_mult, att_v_mult, att_h_mult = GetRecoilModifiers(t)
 
-    local function CompensateBurst(burst_idx)
+    local function CompensateBurst(burst_idx, shots, virtual_trigger)
         local esc_mult = 1.00
         if esc_table then
             esc_mult = esc_table[math.min(burst_idx, #esc_table)] or 1.00
         end
 
-        for i = 1, count do
+        for i = 1, shots do
             local raw_v = (v_curve and v_curve[i]) or 12.0
             local raw_h = (h_curve and h_curve[i]) or (t.h_bias or 0.0)
-            local total_v = raw_v * esc_mult * stance_mult * att_v_mult * SensSetting * 0.35
+            local total_v = raw_v * esc_mult * stance_mult * att_v_mult * SensSetting * 0.35 * SprayVerticalGain
             if (t and t.is_762) or w.caliber == "7.62" then
                 total_v = total_v * 0.89
             end
@@ -1090,7 +1073,10 @@ local function ExecuteBurstRecoil(w)
             local sub_h = total_h / burst_steps
 
             for s = 1, burst_steps do
-                if CheckEmergencyInterrupt() then return false end
+                -- G Hub can still report the release half of our own pulse.
+                -- Check the hold between bursts, as V10 did for virtual presses.
+                if not virtual_trigger and not IsMouseButtonPressed(1) then return false end
+                if not IsAimingActive() or CheckEmergencyInterrupt() then return false end
                 ApplySubPixelMove(sub_h, sub_v)
                 Sleep(step_sleep)
             end
@@ -1099,12 +1085,11 @@ local function ExecuteBurstRecoil(w)
     end
 
     local burst_index = 0
-    local max_bursts = 25
     local did_virtual_press = false
 
     EnablePrimaryMouseButtonEvents(false)
 
-    while IsMouseButtonPressed(1) and burst_index < max_bursts do
+    while IsMouseButtonPressed(1) and rounds_left > 0 do
         if not IsAimingActive() or CheckEmergencyInterrupt() then break end
 
         burst_index = burst_index + 1
@@ -1114,7 +1099,7 @@ local function ExecuteBurstRecoil(w)
             if not IsMouseButtonPressed(1) or CheckEmergencyInterrupt() then break end
             ReleaseMouseButton(1)
             Sleep(pulse_ms)
-            if CheckEmergencyInterrupt() then
+            if not IsAimingActive() or CheckEmergencyInterrupt() then
                 did_virtual_press = false
                 break
             end
@@ -1123,27 +1108,16 @@ local function ExecuteBurstRecoil(w)
             Sleep(settle_ms)
         end
 
-        if not CompensateBurst(burst_index) then
+        local shots = math.min(count, rounds_left)
+        rounds_left = rounds_left - shots
+        -- Anchor V10's refire interval before the movement sleeps so timer
+        -- overshoot during compensation does not add another inter-burst delay.
+        local release_at = GetRunningTime() + shots * burst_steps * step_sleep + cycle_cooldown
+        if not CompensateBurst(burst_index, shots, did_virtual_press) or rounds_left == 0 then
             break
         end
 
-        local sleep_cycles = math.floor(cycle_cooldown / 10)
-        local rem_sleep = cycle_cooldown - (sleep_cycles * 10)
-        local released = false
-        for c = 1, sleep_cycles do
-            if not IsMouseButtonPressed(1) or not IsAimingActive() or CheckEmergencyInterrupt() then
-                released = true
-                break
-            end
-            Sleep(10)
-        end
-        if released then break end
-        if rem_sleep > 0 then
-            if not IsMouseButtonPressed(1) or not IsAimingActive() or CheckEmergencyInterrupt() then
-                break
-            end
-            Sleep(rem_sleep)
-        end
+        if not WaitWhileFiring(release_at) then break end
     end
 
     CleanupAutoTrigger(did_virtual_press)
@@ -1212,7 +1186,7 @@ local function SelectWeapon(bind_id)
         current_weapon = nil
         current_weapon_id = nil
         ResetSprayState()
-        LogMessage("[DINO V10] State: Standby")
+        LogMessage("[DINO V11] State: Standby")
         return
     end
 
@@ -1225,16 +1199,17 @@ local function SelectWeapon(bind_id)
             current_weapon = nil
             current_weapon_id = nil
             ResetSprayState()
-            LogMessage("[DINO V10] State: Standby")
+            LogMessage("[DINO V11] State: Standby")
             return
         end
     end
 
     current_weapon_id = bind_id
     current_weapon = found
+    last_fire_end = nil
     SetMacroActive(true)
     ResetSprayState()
-    LogMessage(string.format("[DINO V10] Active: %s [%s] | %d RPM | Stand: %.2f | Crouch: %.2f | H-Bias: %.3f",
+    LogMessage(string.format("[DINO V11] Active: %s [%s] | %d RPM | Stand: %.2f | Crouch: %.2f | H-Bias: %.3f",
         found.name, found.type, found.rpm or 0,
         found.tuner and found.tuner.stand or 1.0,
         found.tuner and found.tuner.crouch or 0.8,
@@ -1263,6 +1238,10 @@ function OnEvent(event, arg)
 
             if can_fire then
                 if ClickMode == 1 or IsAimingActive() then
+                    if not last_fire_end or GetRunningTime() - last_fire_end >= current_weapon.reload_ms then
+                        rounds_left = current_weapon.mag_rounds
+                    end
+                    if rounds_left <= 0 then return end
                     is_firing = true
                     emergency_off_requested = false
                     if current_weapon.type == "AUTO" then
@@ -1272,6 +1251,7 @@ function OnEvent(event, arg)
                     elseif current_weapon.type == "BURST" then
                         ExecuteBurstRecoil(current_weapon)
                     end
+                    last_fire_end = GetRunningTime()
                     is_firing = false
                     if emergency_off_requested then
                         emergency_off_requested = false
@@ -1287,7 +1267,7 @@ function OnEvent(event, arg)
             current_weapon = nil
             current_weapon_id = nil
             ResetSprayState()
-            LogMessage("[DINO V10] State: Standby")
+            LogMessage("[DINO V11] State: Standby")
             return
         end
 
@@ -1312,6 +1292,7 @@ function OnEvent(event, arg)
         end
 
     elseif event == "PROFILE_ACTIVATED" then
+        last_fire_end = nil
         EnablePrimaryMouseButtonEvents(true)
         ResetSprayState()
         if not banner_logged then
@@ -1319,10 +1300,10 @@ function OnEvent(event, arg)
         else
             LogMessage("----------------------------------------------------------------")
         end
-        LogMessage("[DINO V10] System Initialized (UE4 Cubic Hermite Spline Engine)")
-        LogMessage(string.format("[DINO V10] Config: DPI=%d | Sens=%.2f | Gamma=%.2f | H-Strength=%.2f",
+        LogMessage("[DINO V11] System Initialized (UE4 Cubic Hermite Spline Engine)")
+        LogMessage(string.format("[DINO V11] Config: DPI=%d | Sens=%.2f | Gamma=%.2f | H-Strength=%.2f",
             MOUSE_DPI, SensSetting, SplineResponseGamma, HorizontalStrength))
-        LogMessage(string.format("[DINO V10] Toggles: Crouch=%s | SteadyAim=%s | Attachments=%s (%s) | AutoTap=%s",
+        LogMessage(string.format("[DINO V11] Toggles: Crouch=%s | SteadyAim=%s | Attachments=%s (%s) | AutoTap=%s",
             EnableCrouchMode and "ON" or "OFF",
             EnableHoldBreath and "ON" or "OFF",
             EnableAttachments and "ON" or "OFF",

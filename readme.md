@@ -7,7 +7,7 @@
 ### Hardware-Level Lua Recoil Engine for Logitech G-Series Mice
 *Clean, non-intrusive recoil compensation utilizing native Logitech G Hub Lua APIs.*
 
-[![Latest Version](https://img.shields.io/badge/Release-v10.0-00C853?style=for-the-badge&logo=github)](#quick-start)
+[![Latest Version](https://img.shields.io/badge/Release-v11.0-00C853?style=for-the-badge&logo=github)](#quick-start)
 [![Platform](https://img.shields.io/badge/Platform-Logitech%20G%20Hub%20Lua-00A8FF?style=for-the-badge&logo=logitech)](#quick-start)
 [![Game](https://img.shields.io/badge/PUBG-PC-FF6F00?style=for-the-badge&logo=target)](#recommended-system--game-settings)
 [![DPI Calibrated](https://img.shields.io/badge/DPI-800%20Native-9C27B0?style=for-the-badge)](#recommended-system--game-settings)
@@ -68,7 +68,7 @@ To ensure 1:1 hardware synchronization and optimal tracking accuracy, configure 
 2. Select your **PUBG Profile** from the main dashboard.
 3. Click the **Scripting** icon (`</>`) at the bottom of the screen.
 4. Select **Create a New Lua Script** (or edit your existing script).
-5. Copy and paste the complete contents of [`Dino-V10.lua`](Dino-V10.lua).
+5. Copy and paste the complete contents of [`Dino-V11.lua`](Dino-V11.lua).
 6. Save the script via **Script -> Save** (`Ctrl+S`).
 7. Launch PUBG and test your profile in the Training Grounds.
 
